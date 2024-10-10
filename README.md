@@ -28,12 +28,12 @@ You can download the latest `.dmg` build of Ping Mate [here](https://drive.googl
 - [Node.js](https://nodejs.org/en/download/) (v14 or later).
 - [Git](https://git-scm.com/downloads) (optional, for cloning the repository).
 
-### Installation
+### Setup
 
 1. **Clone the repository**:
 
    ```sh
-   git clone https://github.com/yourusername/pingmate.git
+   git clone git@github.com:kikudjira/pingmate.git
    cd pingmate
    ```
 
