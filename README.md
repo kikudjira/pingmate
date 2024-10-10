@@ -1,8 +1,10 @@
-<img src="/assets/icon_128x128@2x.png" align="right" height="110" />
+<p align="center">
+   <img src="/assets/icon_128x128@2x.png" height="128" />
+</p>
 
-# Ping Mate
+<h1 align="center">Ping Mate</h1>
 
-Ping Mate is a simple Electron-based application that monitors the quality of your internet connection in real-time and provides visual feedback through the system tray icon. The application is designed for macOS and provides a user-friendly interface to customize ping settings and customize color indicators.
+<p align="center">Ping Mate is a simple Electron-based application that monitors the quality of your internet connection in real-time and provides visual feedback through the system tray icon. The application is designed for macOS and provides a user-friendly interface to customize ping settings and customize color indicators. </p>
 
 ## Features
 
