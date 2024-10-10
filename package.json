@@ -1,0 +1,60 @@
+{
+  "name": "pingmate",
+  "version": "1.0.0",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^25.0.0",
+    "electron-builder": "^25.0.5",
+    "electron-rebuild": "^3.2.9"
+  },
+  "dependencies": {
+    "electron-is-dev": "^3.0.1",
+    "electron-log": "^5.2.0",
+    "ping": "^0.4.4",
+    "sharp": "^0.33.5"
+  },
+  "author": {
+    "name": "Andrey Sekirkin",
+    "email": "example@example.com"
+  },
+  "build": {
+    "appId": "com.pingmate",
+    "productName": "Ping Mate",
+    "icon": "assets/icon.icns",
+    "files": [
+      "src/**/*",
+      "package.json",
+      "assets/**/*",
+      "css/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "assets",
+        "to": "assets",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "asar": {
+      "smartUnpack": true
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "icon": "assets/icon.icns",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "entitlements.mac.plist",
+      "entitlementsInherit": "entitlements.mac.plist"
+    }
+  }
+}

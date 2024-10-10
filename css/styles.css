@@ -1,0 +1,213 @@
+/* Reset margins, paddings, and set box-sizing */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Light theme (default) */
+:root {
+  --background-color: #ffffff;
+  --text-color: #151515;
+  --input-background-color: #f9f9f9;
+  --input-text-color: #000000;
+  --border-color: #cccccc;
+  --button-background-color: #007bff;
+  --button-text-color: #ffffff;
+  --button-hover-background-color: #0056b3;
+  --field-label-width: 150px;
+}
+
+/* Dark theme */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #121212;
+    --text-color: #e0e0e0;
+    --input-background-color: #1e1e1e;
+    --input-text-color: #ffffff;
+    --border-color: #333333;
+    --button-background-color: #1a73e8;
+    --button-hover-background-color: #185abc;
+  }
+}
+
+/* Set full height for html and body */
+html, body {
+  height: 100%;
+}
+
+/* Set body as a flex container */
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: Arial, sans-serif;
+}
+
+/* Tab navigation */
+.tab {
+  display: flex;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.tab button {
+  background-color: inherit;
+  border: none;
+  outline: none;
+  padding: 14px 16px;
+  cursor: pointer;
+  color: var(--text-color);
+  font-size: 1rem;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.tab button.active {
+  border-bottom: 2px solid var(--button-background-color);
+}
+
+.tab button:hover {
+  background-color: var(--button-hover-background-color);
+  color: var(--button-text-color);
+}
+
+/* Tab content */
+.tabcontent {
+  flex: 1;
+  display: none;
+}
+
+#SettingsTab.tabcontent {
+  display: flex;
+  flex-direction: column;
+}
+
+#AboutTab.tabcontent {
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* Form styles */
+form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#settings-form {
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.form-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.field {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.field label {
+  width: var(--field-label-width);
+  margin-right: 10px;
+}
+
+.field input[type="number"],
+.field input[type="text"],
+.field input[type="color"] {
+  flex: 1;
+  padding: 8px;
+  background-color: var(--input-background-color);
+  color: var(--input-text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 14pt;
+  height: 40px;
+}
+
+.field input[type="checkbox"] {
+  margin-left: 10px;
+}
+
+/* IP address input */
+.ip-input {
+  display: flex;
+  align-items: center;
+}
+
+.ip-input input[type="number"] {
+  width: 60px;
+  text-align: center;
+}
+
+.ip-input span {
+  margin: 0 5px;
+}
+
+/* Form footer */
+.form-footer {
+  padding: 20px;
+  border-top: 1px solid var(--border-color);
+  margin-top: auto;
+}
+
+/* Buttons */
+.button-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.button-row button {
+  padding: 10px 20px;
+  background-color: var(--button-background-color);
+  color: var(--button-text-color);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.button-row button:hover {
+  background-color: var(--button-hover-background-color);
+}
+
+.button-row button:disabled {
+  background-color: var(--border-color);
+  cursor: not-allowed;
+}
+
+/* Status message */
+#status-message {
+  color: var(--text-color);
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  text-align: right;
+}
+
+/* Hide number input arrows */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+p {
+  line-height: 1.4;
+}
+
+.hidden {
+  display: none;
+}
