@@ -66,7 +66,3 @@ This command will create a distributable `.dmg` file for macOS in the `dist` dir
 ### License
 
 Ping Mate is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
-
-## Author
-
-- Andrey Sekirkin (@Kikudjira)
