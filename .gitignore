@@ -12,8 +12,4 @@ build/
 out/
 .vscode/
 .idea/
-assets/
-!assets/icon.icns
-!assets/icon_128x128@2x.png
-!assets/.gitkeep
 icons/
