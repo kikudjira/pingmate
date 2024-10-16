@@ -194,7 +194,7 @@ ipcMain.handle('reset-settings', async () => {
   return settings;
 });
 
-ipcMain.on('save-settings', (event, newSettings) => {
+ipcMain.on('save-settings', async (event, newSettings) => {
   const oldSettings = { ...settings };
   Object.assign(settings, newSettings);
   saveSettings();
@@ -205,28 +205,20 @@ ipcMain.on('save-settings', (event, newSettings) => {
   }
 
   if (JSON.stringify(oldSettings.iconColors) !== JSON.stringify(settings.iconColors)) {
-    generateAllIcons(iconDir, settings)
-      .then(() => {
-        updateIcons();
-        handlePingChange(previousPingStatus);
-        log.info('Icons updated after settings change');
-      })
-      .catch((error) => {
-        log.error(`Error generating icons: ${error.message}`);
-      });
+    try {
+      await generateAllIcons(iconDir, settings);
+      updateIcons();
+      handlePingChange(previousPingStatus);
+      log.info('Icons updated after settings change');
+    } catch (error) {
+      log.error(`Error generating icons: ${error.message}`);
+    }
   }
 
-  if (
-    oldSettings.pingTarget !== settings.pingTarget ||
-    oldSettings.pingInterval !== settings.pingInterval ||
-    oldSettings.goodPingThreshold !== settings.goodPingThreshold ||
-    oldSettings.unstablePingThreshold !== settings.unstablePingThreshold
-  ) {
-    if (pingProcess) {
-      stopPingProcess();
-      startPingProcess();
-      log.info('Ping process restarted after settings change');
-    }
+  if (pingProcess) {
+    await stopPingProcess();
+    await startPingProcess();
+    log.info('Ping process restarted after settings change');
   }
 
   if (settingsWindow) {
@@ -245,12 +237,17 @@ const createTrayApp = async () => {
     if (!fs.existsSync(iconDir)) {
       fs.mkdirSync(iconDir, { recursive: true });
       log.info(`Created icon directory at: ${iconDir}`);
-    } else {
-      log.info(`Icon directory exists at: ${iconDir}`);
     }
 
-    await generateAllIcons(iconDir, settings);
-    log.info('Icons generated successfully');
+    const requiredIcons = ['default.png', 'green.png', 'yellow.png', 'red.png', 'green-yellow.png', 'green-red.png'];
+    const iconsExist = requiredIcons.every(icon => fs.existsSync(path.join(iconDir, icon)));
+
+    if (!iconsExist) {
+      await generateAllIcons(iconDir, settings);
+      log.info('Icons generated successfully');
+    } else {
+      log.info('Icons already exist, skipping generation');
+    }
 
     updateIcons();
 
