@@ -14,8 +14,9 @@ let previousPingStatus = null;
 let goodPingTimeout = null;
 
 let defaultIcon, greenIcon, yellowIcon, redIcon, greenYellowIcon, greenRedIcon;
-
 let iconDir;
+let settingsWindow;
+let currentIcon = null;
 
 app.disableHardwareAcceleration();
 log.info('Hardware acceleration disabled');
@@ -128,11 +129,14 @@ const clearTemporaryIcon = () => {
 };
 
 const updateIcon = (iconPath) => {
+  if (currentIcon === iconPath) {
+    log.info('Icon update skipped, already set to: ' + iconPath);
+    return;
+  }
   tray.setImage(iconPath);
+  currentIcon = iconPath;
   log.info(`Tray icon updated to: ${iconPath}`);
 };
-
-let settingsWindow;
 
 const openSettingsWindow = () => {
   if (settingsWindow) {
