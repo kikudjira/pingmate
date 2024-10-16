@@ -19,7 +19,7 @@ Ping Mate is a simple Electron-based application that monitors the quality of yo
 
 ## Download the Latest Version
 
-You can download the latest `.dmg` build of Ping Mate [here](https://drive.google.com/file/d/1o_Xu_NcHxM6OM_uwzxpUo4O63y9tUJg4/view?usp=sharing).
+You can download the latest `.dmg` build of Ping Mate [here](https://drive.google.com/file/d/1kzD2SO40oBwn3VDllanJLcI0zAOLg7Hk/view?usp=sharing).
 
 ## Getting Started
 
