@@ -83,7 +83,7 @@ const stopPingProcess = () => {
 };
 
 const handlePingChange = (status, pingTime) => {
-  let tooltipText = pingTime !== null ? `${pingTime}ms` : 'Pingmate - Monitoring your connection';
+  let tooltipText = pingTime !== null ? `${pingTime | 0} ms` : 'Pingmate - Monitoring your connection';
   tray.setToolTip(tooltipText);
 
   switch (status) {
