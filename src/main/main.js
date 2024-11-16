@@ -138,6 +138,8 @@ const updateIcon = (iconPath) => {
   log.info(`Tray icon updated to: ${iconPath}`);
 };
 
+// backgroundColor colors here ↓
+
 const openSettingsWindow = () => {
   if (settingsWindow) {
     settingsWindow.focus();
@@ -146,7 +148,6 @@ const openSettingsWindow = () => {
 
   applyTheme();
 
-  // toDo should use colors from css
   const backgroundColor = nativeTheme.shouldUseDarkColors ? '#121212' : '#ffffff';
 
   settingsWindow = new BrowserWindow({
