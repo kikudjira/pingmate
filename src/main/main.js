@@ -144,10 +144,17 @@ const openSettingsWindow = () => {
     return;
   }
 
+  applyTheme();
+
+  // toDo should use colors from css
+  const backgroundColor = nativeTheme.shouldUseDarkColors ? '#121212' : '#ffffff';
+
   settingsWindow = new BrowserWindow({
     width: 440,
     height: 628,
     resizable: false,
+    show: false,
+    backgroundColor: backgroundColor,
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
@@ -156,7 +163,10 @@ const openSettingsWindow = () => {
   });
 
   settingsWindow.loadFile(path.join(__dirname, '../renderer/settings.html'));
-  applyTheme();
+
+  settingsWindow.webContents.once('did-finish-load', () => {
+    settingsWindow.show();
+  });
 
   settingsWindow.on('closed', () => {
     settingsWindow = null;
