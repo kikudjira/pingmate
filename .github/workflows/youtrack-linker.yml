@@ -1,0 +1,60 @@
+name: YouTrack Issue Linker
+
+on:
+  pull_request:
+    types: [opened, edited]
+
+jobs:
+  post-youtrack-link:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Link YouTrack Issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const YOUTRACK_URL = "https://YOUR-DOMAIN.youtrack.cloud";
+            const PROJECT_PREFIXES = ["FUN", "DDD", "FFB", "DOC"]; 
+
+            const prTitle = context.payload.pull_request.title;
+            const prNumber = context.payload.pull_request.number;
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            const prefixesPattern = PROJECT_PREFIXES.join('|');
+            const regex = new RegExp(`((${prefixesPattern})-\\d+)`);
+            const match = prTitle.match(regex);
+
+            if (!match) {
+              console.log("No YouTrack issue ID found in the PR title.");
+              return;
+            }
+
+            const issueId = match[0];
+            const issueUrl = `${YOUTRACK_URL}/issue/${issueId}`;
+            const commentBody = `🔗 **YouTrack Issue:** [${issueId}](${issueUrl})`;
+
+            // Check if the bot has already posted a similar comment
+            const { data: comments } = await github.rest.issues.listComments({
+              owner,
+              repo,
+              issue_number: prNumber,
+            });
+
+            const botComment = comments.find(comment => 
+              comment.user.login === 'github-actions[bot]' && comment.body.includes(issueUrl)
+            );
+
+            if (botComment) {
+              console.log("Bot has already posted a comment with a link to this issue.");
+              return;
+            }
+            
+            // If a match is found and no comment exists, post a new one
+            await github.rest.issues.createComment({
+              owner,
+              repo,
+              issue_number: prNumber,
+              body: commentBody
+            });
+            
+            console.log(`Posted a comment with a link to issue ${issueId}`);
