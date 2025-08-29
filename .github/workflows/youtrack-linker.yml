@@ -7,8 +7,10 @@ on:
 jobs:
   post-youtrack-link:
     runs-on: ubuntu-latest
+    
     permissions:
       pull-requests: write
+
     steps:
       - name: Link YouTrack Issue
         uses: actions/github-script@v7
@@ -17,46 +19,66 @@ jobs:
             const YOUTRACK_URL = "https://YOUR-DOMAIN.youtrack.cloud";
             const PROJECT_PREFIXES = ["FUN", "DDD", "FFB", "DOC"]; 
 
-            const prTitle = context.payload.pull_request.title;
-            const prNumber = context.payload.pull_request.number;
+            const pr = context.payload.pull_request;
             const owner = context.repo.owner;
             const repo = context.repo.repo;
 
+            // --- 1. Find the new issue ID in the PR title ---
             const prefixesPattern = PROJECT_PREFIXES.join('|');
             const regex = new RegExp(`((${prefixesPattern})-\\d+)`);
-            const match = prTitle.match(regex);
+            const titleMatch = pr.title.match(regex);
+            const newIssueId = titleMatch ? titleMatch[0] : null;
 
-            if (!match) {
-              console.log("No YouTrack issue ID found in the PR title.");
-              return;
-            }
-
-            const issueId = match[0];
-            const issueUrl = `${YOUTRACK_URL}/issue/${issueId}`;
-            const commentBody = `🔗 **YouTrack Issue:** [${issueId}](${issueUrl})`;
-
-            // Check if the bot has already posted a similar comment
+            // --- 2. Find the bot's existing comment ---
             const { data: comments } = await github.rest.issues.listComments({
               owner,
               repo,
-              issue_number: prNumber,
+              issue_number: pr.number,
             });
 
             const botComment = comments.find(comment => 
-              comment.user.login === 'github-actions[bot]' && comment.body.includes(issueUrl)
+              comment.user.login === 'github-actions[bot]' && 
+              comment.body.includes('**YouTrack Issue:**')
             );
 
-            if (botComment) {
-              console.log("Bot has already posted a comment with a link to this issue.");
-              return;
+            // --- 3. Decide what to do ---
+
+            if (newIssueId) {
+              // A task ID was found in the title
+              const newBody = `🔗 **YouTrack Issue:** [${newIssueId}](${YOUTRACK_URL}/issue/${newIssueId})`;
+
+              if (botComment) {
+                // Bot comment already exists, check if it needs an update
+                if (botComment.body !== newBody) {
+                  await github.rest.issues.updateComment({
+                    owner,
+                    repo,
+                    comment_id: botComment.id,
+                    body: newBody,
+                  });
+                  console.log(`Updated comment with a link to issue ${newIssueId}`);
+                } else {
+                  console.log(`Comment is already up-to-date with issue ${newIssueId}`);
+                }
+              } else {
+                // No bot comment found, create a new one
+                await github.rest.issues.createComment({
+                  owner,
+                  repo,
+                  issue_number: pr.number,
+                  body: newBody,
+                });
+                console.log(`Created a new comment with a link to issue ${newIssueId}`);
+              }
+            } else if (botComment) {
+              // No task ID in the title, but a bot comment exists. Let's delete it.
+              await github.rest.issues.deleteComment({
+                owner,
+                repo,
+                comment_id: botComment.id,
+              });
+              console.log("Removed the outdated YouTrack link comment.");
+            } else {
+              // No task ID in the title, and no bot comment to clean up. Do nothing.
+              console.log("No YouTrack issue ID in the title and no existing comment to manage.");
             }
-            
-            // If a match is found and no comment exists, post a new one
-            await github.rest.issues.createComment({
-              owner,
-              repo,
-              issue_number: prNumber,
-              body: commentBody
-            });
-            
-            console.log(`Posted a comment with a link to issue ${issueId}`);
