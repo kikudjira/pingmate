@@ -2,83 +2,182 @@ name: YouTrack Issue Linker
 
 on:
   pull_request:
+    types: [opened, edited, synchronize]
+  pull_request_target:
     types: [opened, edited]
 
+env:
+  YOUTRACK_URL: "https://youtrack.cloud"
+  PROJECT_PREFIXES: "FUN,DDD,FFB,DOC"
+  COMMENT_MARKER: "<!-- youtrack-linker -->"
+
 jobs:
-  post-youtrack-link:
+  link-youtrack-issues:
     runs-on: ubuntu-latest
-    
+    timeout-minutes: 5
+
     permissions:
       pull-requests: write
+      contents: read
 
     steps:
-      - name: Link YouTrack Issue
+      - name: Link YouTrack Issues
         uses: actions/github-script@v7
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          retries: 3
           script: |
-            const YOUTRACK_URL = "https://YOUR-DOMAIN.youtrack.cloud";
-            const PROJECT_PREFIXES = ["FUN", "DDD", "FFB", "DOC"]; 
+            const YOUTRACK_URL = process.env.YOUTRACK_URL;
+            const PROJECT_PREFIXES = process.env.PROJECT_PREFIXES.split(',').map(p => p.trim());
+            const COMMENT_MARKER = process.env.COMMENT_MARKER;
 
             const pr = context.payload.pull_request;
-            const owner = context.repo.owner;
-            const repo = context.repo.repo;
+            const { owner, repo } = context.repo;
 
-            // --- 1. Find the new issue ID in the PR title ---
-            const prefixesPattern = PROJECT_PREFIXES.join('|');
-            const regex = new RegExp(`((${prefixesPattern})-\\d+)`);
-            const titleMatch = pr.title.match(regex);
-            const newIssueId = titleMatch ? titleMatch[0] : null;
+            core.info(`Processing PR #${pr.number}: "${pr.title}"`);
 
-            // --- 2. Find the bot's existing comment ---
-            const { data: comments } = await github.rest.issues.listComments({
-              owner,
-              repo,
-              issue_number: pr.number,
-            });
+            /**
+             * Extract YouTrack issue IDs from text
+             */
+            function extractIssueIds(text) {
+              if (!text) return [];
 
-            const botComment = comments.find(comment => 
-              comment.user.login === 'github-actions[bot]' && 
-              comment.body.includes('**YouTrack Issue:**')
-            );
+              const prefixPattern = PROJECT_PREFIXES.join('|');
+              const regex = new RegExp(`(${prefixPattern})-\\d+`, 'gi');
+              const matches = text.match(regex) || [];
 
-            // --- 3. Decide what to do ---
+              // Remove duplicates and normalize case
+              return [...new Set(matches.map(id => id.toUpperCase()))];
+            }
 
-            if (newIssueId) {
-              // A task ID was found in the title
-              const newBody = `🔗 **YouTrack Issue:** [${newIssueId}](${YOUTRACK_URL}/issue/${newIssueId})`;
+            /**
+             * Create YouTrack link comment body
+             */
+            function createCommentBody(issueIds) {
+              if (issueIds.length === 0) return null;
 
-              if (botComment) {
-                // Bot comment already exists, check if it needs an update
-                if (botComment.body !== newBody) {
-                  await github.rest.issues.updateComment({
+              const links = issueIds.map(id =>
+                `[${id}](${YOUTRACK_URL}/issue/${id})`
+              ).join(', ');
+
+              const plural = issueIds.length > 1;
+              const header = plural ? '🔗 **YouTrack Issues:**' : '🔗 **YouTrack Issue:**';
+
+              return `${COMMENT_MARKER}\n${header} ${links}`;
+            }
+
+            /**
+             * Find existing bot comment
+             */
+            async function findBotComment() {
+              try {
+                const { data: comments } = await github.rest.issues.listComments({
+                  owner,
+                  repo,
+                  issue_number: pr.number,
+                  per_page: 100
+                });
+
+                return comments.find(comment =>
+                  comment.user.login === 'github-actions[bot]' &&
+                  comment.body.includes(COMMENT_MARKER)
+                );
+              } catch (error) {
+                core.warning(`Failed to fetch comments: ${error.message}`);
+                return null;
+              }
+            }
+
+            /**
+             * Validate YouTrack issue exists (optional enhancement)
+             */
+            function validateIssueIds(issueIds) {
+              const validPrefixes = PROJECT_PREFIXES;
+              return issueIds.filter(id => {
+                const prefix = id.split('-')[0];
+                if (!validPrefixes.includes(prefix)) {
+                  core.warning(`Issue ${id} has invalid prefix. Valid prefixes: ${validPrefixes.join(', ')}`);
+                  return false;
+                }
+                return true;
+              });
+            }
+
+            try {
+              // Extract issue IDs from PR title and body
+              const titleIssues = extractIssueIds(pr.title);
+              const bodyIssues = extractIssueIds(pr.body);
+              const allIssues = [...new Set([...titleIssues, ...bodyIssues])];
+
+              core.info(`Found ${allIssues.length} issue(s): ${allIssues.join(', ')}`);
+
+              // Validate issue IDs
+              const validIssues = validateIssueIds(allIssues);
+              if (validIssues.length !== allIssues.length) {
+                core.warning(`${allIssues.length - validIssues.length} invalid issue(s) filtered out`);
+              }
+
+              // Find existing comment
+              const existingComment = await findBotComment();
+              const newCommentBody = createCommentBody(validIssues);
+
+              if (validIssues.length > 0) {
+                // We have valid issues to link
+                if (existingComment) {
+                  // Update existing comment if different
+                  if (existingComment.body !== newCommentBody) {
+                    await github.rest.issues.updateComment({
+                      owner,
+                      repo,
+                      comment_id: existingComment.id,
+                      body: newCommentBody,
+                    });
+                    core.info(`✅ Updated comment with ${validIssues.length} issue link(s)`);
+                  } else {
+                    core.info('ℹ️ Comment already up-to-date');
+                  }
+                } else {
+                  // Create new comment
+                  await github.rest.issues.createComment({
                     owner,
                     repo,
-                    comment_id: botComment.id,
-                    body: newBody,
+                    issue_number: pr.number,
+                    body: newCommentBody,
                   });
-                  console.log(`Updated comment with a link to issue ${newIssueId}`);
-                } else {
-                  console.log(`Comment is already up-to-date with issue ${newIssueId}`);
+                  core.info(`✅ Created comment with ${validIssues.length} issue link(s)`);
                 }
               } else {
-                // No bot comment found, create a new one
+                // No valid issues found
+                if (existingComment) {
+                  // Remove outdated comment
+                  await github.rest.issues.deleteComment({
+                    owner,
+                    repo,
+                    comment_id: existingComment.id,
+                  });
+                  core.info('🗑️ Removed outdated YouTrack link comment');
+                } else {
+                  core.info('ℹ️ No YouTrack issues found and no comment to manage');
+                }
+              }
+
+              // Set outputs for potential use in other jobs
+              core.setOutput('issue-count', validIssues.length);
+              core.setOutput('issues', validIssues.join(','));
+
+            } catch (error) {
+              core.setFailed(`Workflow failed: ${error.message}`);
+              core.error(`Stack trace: ${error.stack}`);
+
+              // Attempt to post error comment for debugging
+              try {
                 await github.rest.issues.createComment({
                   owner,
                   repo,
                   issue_number: pr.number,
-                  body: newBody,
+                  body: `${COMMENT_MARKER}\n⚠️ **Error linking YouTrack issues:** ${error.message}\n\nPlease check the [workflow run](${context.payload.repository.html_url}/actions/runs/${context.runId}) for details.`,
                 });
-                console.log(`Created a new comment with a link to issue ${newIssueId}`);
+              } catch (commentError) {
+                core.warning(`Failed to post error comment: ${commentError.message}`);
               }
-            } else if (botComment) {
-              // No task ID in the title, but a bot comment exists. Let's delete it.
-              await github.rest.issues.deleteComment({
-                owner,
-                repo,
-                comment_id: botComment.id,
-              });
-              console.log("Removed the outdated YouTrack link comment.");
-            } else {
-              // No task ID in the title, and no bot comment to clean up. Do nothing.
-              console.log("No YouTrack issue ID in the title and no existing comment to manage.");
             }
