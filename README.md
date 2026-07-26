@@ -34,6 +34,8 @@ A native macOS menu bar app, written in Swift and SwiftUI.
 brew install --cask kikudjira/pingmate/pingmate
 ```
 
+The tap is added for you. Use the full name — with the short `pingmate`, Homebrew refuses to load a cask from a tap you haven't trusted, and you'd need `brew trust kikudjira/pingmate` first.
+
 Or grab the DMG from the [latest release](https://github.com/kikudjira/pingmate/releases/latest) and drag PingMate to Applications — then read the next bit, because macOS is about to be dramatic.
 
 ## "PingMate can't be opened because Apple cannot check it"
