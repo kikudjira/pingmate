@@ -202,6 +202,12 @@ struct SettingsTabView: View {
                     .labelsHidden()
                     .toggleStyle(.switch)
                     .onChange(of: editedSettings.startAtLogin) { _, _ in autoSave() }
+                    // Storage re-reads the system every time this window opens; the form holds
+                    // its own draft and would otherwise keep showing a value the system dropped.
+                    .onChange(of: storage.settings.startAtLogin) { _, actual in
+                        guard editedSettings.startAtLogin != actual else { return }
+                        editedSettings.startAtLogin = actual
+                    }
             }
 
             if let saveError {

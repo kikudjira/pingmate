@@ -14,6 +14,9 @@ class SettingsWindowController: NSObject {
     }
 
     func showWindow() {
+        // The Login Items pane may have been used since the form was last open.
+        settingsStorage.syncLoginItemState()
+
         if let window = window {
             window.makeKeyAndOrderFront(nil)
             NSApp.activate(ignoringOtherApps: true)

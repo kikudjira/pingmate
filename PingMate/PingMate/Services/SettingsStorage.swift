@@ -28,9 +28,36 @@ class SettingsStorage: ObservableObject {
     private var appliedLoginState: Bool
 
     init() {
-        let loaded = Self.loadSettings()
+        var loaded = Self.loadSettings()
+
+        // The system owns this setting, not us. A login item can be removed in System Settings,
+        // survive an app deletion in our own defaults, or fail to register in the first place —
+        // and a stored `true` that the system disagrees with used to jam the toggle in both
+        // directions: enabling was skipped as already-applied, disabling threw and rolled back.
+        let registered = Self.isRegisteredAsLoginItem
+        if loaded.startAtLogin != registered {
+            Log.settings.info("Login item state disagreed with the system; using the system's \(registered)")
+            loaded.startAtLogin = registered
+        }
+
         settings = loaded
-        appliedLoginState = loaded.startAtLogin
+        appliedLoginState = registered
+        persist()
+    }
+
+    private static var isRegisteredAsLoginItem: Bool {
+        SMAppService.mainApp.status == .enabled
+    }
+
+    /// Re-reads the system's view before the user can act on ours. `SMAppService` can be changed
+    /// from System Settings at any time, with nothing to tell the app about it.
+    func syncLoginItemState() {
+        let registered = Self.isRegisteredAsLoginItem
+        appliedLoginState = registered
+        guard settings.startAtLogin != registered else { return }
+        Log.settings.info("Login item changed outside the app; now \(registered)")
+        settings.startAtLogin = registered
+        persist()
     }
 
     private static func loadSettings() -> Settings {
@@ -85,11 +112,11 @@ class SettingsStorage: ObservableObject {
         guard !defaults.bool(forKey: loginPromptKey) else { return false }
         // A login item can already exist from an earlier install: don't ask about a setting
         // that is visibly already on.
-        guard SMAppService.mainApp.status != .enabled else {
+        guard !Self.isRegisteredAsLoginItem else {
             markLoginItemAsked()
             return false
         }
-        return !settings.startAtLogin
+        return true
     }
 
     func markLoginItemAsked() {
@@ -119,6 +146,14 @@ class SettingsStorage: ObservableObject {
     }
 
     private func updateLoginItem(enabled: Bool) throws {
+        // Asking for the state it is already in is not a failure. Unregistering an item the
+        // system has never heard of throws, which is how a stale `true` used to become a toggle
+        // that could not be switched off.
+        guard enabled != Self.isRegisteredAsLoginItem else {
+            Log.settings.info("Login item already \(enabled ? "registered" : "unregistered")")
+            return
+        }
+
         if enabled {
             try SMAppService.mainApp.register()
             Log.settings.info("Registered for login item")
