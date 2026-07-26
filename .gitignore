@@ -1,0 +1,23 @@
+# macOS
+.DS_Store
+*.swp
+
+# Xcode
+build/
+dist/
+DerivedData/
+*.xcuserstate
+*.moved-aside
+**/xcuserdata/
+
+# Editors / local tooling
+.claude/
+.vscode/
+.idea/
+
+# Working docs, not published
+claude.md
+PROGRESS.md
+
+# Design source (encrypted Pencil file)
+pingmate.pen

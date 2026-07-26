@@ -1,0 +1,478 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A10000010000000000000001 /* PingMateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000001 /* PingMateApp.swift */; };
+		A10000010000000000000002 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000002 /* AppDelegate.swift */; };
+		A10000010000000000000003 /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000003 /* StatusBarController.swift */; };
+		A10000010000000000000004 /* PopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000004 /* PopoverView.swift */; };
+		A10000010000000000000005 /* MonitorTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000005 /* MonitorTabView.swift */; };
+		A10000010000000000000006 /* SettingsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000006 /* SettingsTabView.swift */; };
+		A10000010000000000000007 /* AboutTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000007 /* AboutTabView.swift */; };
+		A10000010000000000000020 /* MonitorWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000020 /* MonitorWindowController.swift */; };
+		A10000010000000000000021 /* MonitorWindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000021 /* MonitorWindowView.swift */; };
+		A10000010000000000000008 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000008 /* Settings.swift */; };
+		A10000010000000000000009 /* PingResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000009 /* PingResult.swift */; };
+		A10000010000000000000010 /* ConnectionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000010 /* ConnectionStatus.swift */; };
+		A10000010000000000000011 /* PingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000011 /* PingService.swift */; };
+		A10000010000000000000012 /* SettingsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000012 /* SettingsStorage.swift */; };
+		A10000010000000000000013 /* IconGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000013 /* IconGenerator.swift */; };
+		A10000010000000000000014 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000014 /* Extensions.swift */; };
+		A10000010000000000000015 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000015 /* Logger.swift */; };
+		A10000010000000000000016 /* IPValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000016 /* IPValidator.swift */; };
+		A10000010000000000000017 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000017 /* Assets.xcassets */; };
+		A10000010000000000000022 /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000022 /* SettingsWindowController.swift */; };
+		A10000010000000000000023 /* SettingsWindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000023 /* SettingsWindowView.swift */; };
+		A10000010000000000000100 /* StatusHeadline.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000100 /* StatusHeadline.swift */; };
+		A10000010000000000000101 /* Sparkline.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000101 /* Sparkline.swift */; };
+		A10000010000000000000102 /* InlineStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000102 /* InlineStats.swift */; };
+		A10000010000000000000103 /* GlassControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000103 /* GlassControls.swift */; };
+		A10000010000000000000104 /* SettingsControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000104 /* SettingsControls.swift */; };
+		A10000010000000000000105 /* TabButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000105 /* TabButton.swift */; };
+		A10000010000000000000106 /* DesignTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000106 /* DesignTokens.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A20000010000000000000001 /* PingMateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingMateApp.swift; sourceTree = "<group>"; };
+		A20000010000000000000002 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A20000010000000000000003 /* StatusBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
+		A20000010000000000000004 /* PopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverView.swift; sourceTree = "<group>"; };
+		A20000010000000000000005 /* MonitorTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorTabView.swift; sourceTree = "<group>"; };
+		A20000010000000000000006 /* SettingsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabView.swift; sourceTree = "<group>"; };
+		A20000010000000000000007 /* AboutTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTabView.swift; sourceTree = "<group>"; };
+		A20000010000000000000020 /* MonitorWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorWindowController.swift; sourceTree = "<group>"; };
+		A20000010000000000000021 /* MonitorWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorWindowView.swift; sourceTree = "<group>"; };
+		A20000010000000000000022 /* SettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
+		A20000010000000000000023 /* SettingsWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowView.swift; sourceTree = "<group>"; };
+		A20000010000000000000008 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		A20000010000000000000009 /* PingResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingResult.swift; sourceTree = "<group>"; };
+		A20000010000000000000010 /* ConnectionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionStatus.swift; sourceTree = "<group>"; };
+		A20000010000000000000011 /* PingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingService.swift; sourceTree = "<group>"; };
+		A20000010000000000000012 /* SettingsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStorage.swift; sourceTree = "<group>"; };
+		A20000010000000000000013 /* IconGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconGenerator.swift; sourceTree = "<group>"; };
+		A20000010000000000000014 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		A20000010000000000000015 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		A20000010000000000000016 /* IPValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPValidator.swift; sourceTree = "<group>"; };
+		A20000010000000000000017 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A20000010000000000000018 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A20000010000000000000019 /* PingMate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PingMate.entitlements; sourceTree = "<group>"; };
+		A30000010000000000000001 /* PingMate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PingMate.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A20000010000000000000100 /* StatusHeadline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusHeadline.swift; sourceTree = "<group>"; };
+		A20000010000000000000101 /* Sparkline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sparkline.swift; sourceTree = "<group>"; };
+		A20000010000000000000102 /* InlineStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InlineStats.swift; sourceTree = "<group>"; };
+		A20000010000000000000103 /* GlassControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassControls.swift; sourceTree = "<group>"; };
+		A20000010000000000000104 /* SettingsControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsControls.swift; sourceTree = "<group>"; };
+		A20000010000000000000105 /* TabButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabButton.swift; sourceTree = "<group>"; };
+		A20000010000000000000106 /* DesignTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignTokens.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A40000010000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A50000010000000000000001 = {
+			isa = PBXGroup;
+			children = (
+				A50000010000000000000002 /* PingMate */,
+				A50000010000000000000003 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A50000010000000000000002 /* PingMate */ = {
+			isa = PBXGroup;
+			children = (
+				A20000010000000000000001 /* PingMateApp.swift */,
+				A20000010000000000000002 /* AppDelegate.swift */,
+				A50000010000000000000004 /* Models */,
+				A50000010000000000000005 /* Views */,
+				A50000010000000000000006 /* Services */,
+				A50000010000000000000007 /* Utilities */,
+				A20000010000000000000017 /* Assets.xcassets */,
+				A20000010000000000000018 /* Info.plist */,
+				A20000010000000000000019 /* PingMate.entitlements */,
+			);
+			path = PingMate;
+			sourceTree = "<group>";
+		};
+		A50000010000000000000003 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A30000010000000000000001 /* PingMate.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A50000010000000000000004 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A20000010000000000000008 /* Settings.swift */,
+				A20000010000000000000009 /* PingResult.swift */,
+				A20000010000000000000010 /* ConnectionStatus.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A50000010000000000000005 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A50000010000000000000008 /* Components */,
+				A20000010000000000000003 /* StatusBarController.swift */,
+				A20000010000000000000004 /* PopoverView.swift */,
+				A20000010000000000000005 /* MonitorTabView.swift */,
+				A20000010000000000000006 /* SettingsTabView.swift */,
+				A20000010000000000000007 /* AboutTabView.swift */,
+				A20000010000000000000020 /* MonitorWindowController.swift */,
+				A20000010000000000000021 /* MonitorWindowView.swift */,
+				A20000010000000000000022 /* SettingsWindowController.swift */,
+				A20000010000000000000023 /* SettingsWindowView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A50000010000000000000006 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A20000010000000000000011 /* PingService.swift */,
+				A20000010000000000000012 /* SettingsStorage.swift */,
+				A20000010000000000000013 /* IconGenerator.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A50000010000000000000007 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				A20000010000000000000106 /* DesignTokens.swift */,
+				A20000010000000000000014 /* Extensions.swift */,
+				A20000010000000000000015 /* Logger.swift */,
+				A20000010000000000000016 /* IPValidator.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		A50000010000000000000008 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				A20000010000000000000100 /* StatusHeadline.swift */,
+				A20000010000000000000101 /* Sparkline.swift */,
+				A20000010000000000000102 /* InlineStats.swift */,
+				A20000010000000000000103 /* GlassControls.swift */,
+				A20000010000000000000104 /* SettingsControls.swift */,
+				A20000010000000000000105 /* TabButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A60000010000000000000001 /* PingMate */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A70000010000000000000001 /* Build configuration list for PBXNativeTarget "PingMate" */;
+			buildPhases = (
+				A80000010000000000000001 /* Sources */,
+				A40000010000000000000001 /* Frameworks */,
+				A90000010000000000000001 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PingMate;
+			productName = PingMate;
+			productReference = A30000010000000000000001 /* PingMate.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AA0000010000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					A60000010000000000000001 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = AB0000010000000000000001 /* Build configuration list for PBXProject "PingMate" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A50000010000000000000001;
+			productRefGroup = A50000010000000000000003 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A60000010000000000000001 /* PingMate */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A90000010000000000000001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000010000000000000017 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A80000010000000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000010000000000000100 /* StatusHeadline.swift in Sources */,
+				A10000010000000000000101 /* Sparkline.swift in Sources */,
+				A10000010000000000000102 /* InlineStats.swift in Sources */,
+				A10000010000000000000103 /* GlassControls.swift in Sources */,
+				A10000010000000000000104 /* SettingsControls.swift in Sources */,
+				A10000010000000000000105 /* TabButton.swift in Sources */,
+				A10000010000000000000106 /* DesignTokens.swift in Sources */,
+				A10000010000000000000001 /* PingMateApp.swift in Sources */,
+				A10000010000000000000002 /* AppDelegate.swift in Sources */,
+				A10000010000000000000003 /* StatusBarController.swift in Sources */,
+				A10000010000000000000004 /* PopoverView.swift in Sources */,
+				A10000010000000000000005 /* MonitorTabView.swift in Sources */,
+				A10000010000000000000006 /* SettingsTabView.swift in Sources */,
+				A10000010000000000000007 /* AboutTabView.swift in Sources */,
+				A10000010000000000000008 /* Settings.swift in Sources */,
+				A10000010000000000000009 /* PingResult.swift in Sources */,
+				A10000010000000000000010 /* ConnectionStatus.swift in Sources */,
+				A10000010000000000000011 /* PingService.swift in Sources */,
+				A10000010000000000000012 /* SettingsStorage.swift in Sources */,
+				A10000010000000000000013 /* IconGenerator.swift in Sources */,
+				A10000010000000000000014 /* Extensions.swift in Sources */,
+				A10000010000000000000015 /* Logger.swift in Sources */,
+				A10000010000000000000016 /* IPValidator.swift in Sources */,
+				A10000010000000000000020 /* MonitorWindowController.swift in Sources */,
+				A10000010000000000000021 /* MonitorWindowView.swift in Sources */,
+				A10000010000000000000022 /* SettingsWindowController.swift in Sources */,
+				A10000010000000000000023 /* SettingsWindowView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		AC0000010000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AC0000010000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		AD0000010000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PingMate/PingMate.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = PingMate/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PingMate;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 kikudjira. All rights reserved.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kikudjira.pingmate;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		AD0000010000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PingMate/PingMate.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = PingMate/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PingMate;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 kikudjira. All rights reserved.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kikudjira.pingmate;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A70000010000000000000001 /* Build configuration list for PBXNativeTarget "PingMate" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AD0000010000000000000001 /* Debug */,
+				AD0000010000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AB0000010000000000000001 /* Build configuration list for PBXProject "PingMate" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC0000010000000000000001 /* Debug */,
+				AC0000010000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AA0000010000000000000001 /* Project object */;
+}
