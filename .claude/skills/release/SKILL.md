@@ -8,17 +8,35 @@ description: Cut a PingMate release — tag, watch the build, publish the DMG an
 A release is a tag push. Everything else follows from it, except the cask, which is updated by hand
 in a second repository.
 
+**Never push to `main` directly — in either repo.** Every change, including a one-line cask bump,
+goes on a branch and through a pull request. Tags are the only thing pushed straight to the remote,
+and only after the PR they build on has been merged.
+
 - App repo: `kikudjira/pingmate` (this one)
 - Tap repo: `kikudjira/homebrew-pingmate`, working copy at `/Users/kikudjira/github/homebrew-pingmate`
 
 There is nothing to bump in the source. `MARKETING_VERSION` is injected from the tag name and
 `CURRENT_PROJECT_VERSION` from the run number, so the only place a version is decided is the tag.
 
-## 1. Preflight
+## 1. Land the changes through a PR
+
+Whatever is going into the release lives on a branch:
 
 ```sh
-git -C . status --porcelain      # must be empty
-git -C . log --oneline origin/main..HEAD   # must be empty — the tag builds what is on the remote
+git checkout -b <branch>
+git commit ...
+git push -u origin <branch>
+gh pr create --base main --title "..." --body "..."
+```
+
+Hand the diff over for review before opening the PR, and let the author merge it. Only then tag.
+
+## 2. Preflight
+
+```sh
+git checkout main && git pull
+git status --porcelain                     # must be empty
+git log --oneline origin/main..HEAD        # must be empty — the tag builds what is on the remote
 ```
 
 Build once locally before tagging anything. A red CI run on a tag is annoying to undo, because the
@@ -33,7 +51,7 @@ Confirm the app still launches and pings, and remember to `pkill -x PingMate` be
 local build — the copy from `/Applications` is usually already in the menu bar and they share a
 `UserDefaults` domain.
 
-## 2. Tag
+## 3. Tag
 
 Semver, `v` prefix. Patch for fixes, minor for features.
 
@@ -42,7 +60,7 @@ git tag -a v<version> -m "PingMate <version>"
 git push origin v<version>
 ```
 
-## 3. Watch the run
+## 4. Watch the run
 
 ```sh
 gh run list -R kikudjira/pingmate --limit 1
@@ -58,7 +76,7 @@ If the run fails, fix forward and re-tag:
 git tag -d v<version> && git push origin :refs/tags/v<version>
 ```
 
-## 4. Bump the cask by hand
+## 5. Bump the cask by hand
 
 The workflow cannot push to the tap — `GITHUB_TOKEN` is scoped to this repo — so it only prints
 what changed. **Never copy the sha256 from a local build**: CI produces its own DMG and the hash
@@ -76,14 +94,21 @@ Then in `/Users/kikudjira/github/homebrew-pingmate/Casks/pingmate.rb` update the
   sha256 "<hash from the released DMG>"
 ```
 
+The tap gets the same treatment as the app repo — branch, PR, merge. A one-line bump is still a
+pull request:
+
 ```sh
 cd /Users/kikudjira/github/homebrew-pingmate
 brew style Casks/pingmate.rb        # must be clean
+git checkout -b cask-<version>
 git commit -am "chore: cask -> <version>"
-git push origin main
+git push -u origin cask-<version>
+gh pr create --base main --title "chore: cask -> <version>" --body "..."
 ```
 
-## 5. Verify the published artefact
+Until that PR is merged, `brew install` still serves the previous version.
+
+## 6. Verify the published artefact
 
 ```sh
 brew fetch --cask kikudjira/pingmate/pingmate   # checksum must match
