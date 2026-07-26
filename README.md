@@ -30,23 +30,37 @@ A native macOS menu bar app, written in Swift and SwiftUI.
 
 ## Install
 
-```sh
-brew install --cask kikudjira/pingmate/pingmate
-```
+Two ways. Both end with PingMate in `/Applications`.
 
-The tap is added for you. Use the full name — with the short `pingmate`, Homebrew refuses to load a cask from a tap you haven't trusted, and you'd need `brew trust kikudjira/pingmate` first.
+### 📦 Option 1 — Download the DMG
 
-Or grab the DMG from the [latest release](https://github.com/kikudjira/pingmate/releases/latest) and drag PingMate to Applications — then read the next bit, because macOS is about to be dramatic.
+**1.** Download `PingMate-<version>.dmg` from the [**latest release**](https://github.com/kikudjira/pingmate/releases/latest).
 
-## "PingMate can't be opened because Apple cannot check it"
+**2.** Open it and drag **PingMate** into **Applications**.
 
-It's fine — it's unsigned. One command fixes it for good:
+**3.** Clear the quarantine flag — one command, once:
 
 ```sh
 xattr -dr com.apple.quarantine /Applications/PingMate.app
 ```
 
-Or open **System Settings → Privacy & Security** and hit **Open Anyway**. The Homebrew cask does this for you.
+**4.** Launch it. The dot appears in the menu bar; there is no Dock icon and no window.
+
+> **Why step 3?** The app isn't signed with a paid Apple certificate, so macOS quarantines the download and says *"PingMate can't be opened because Apple cannot check it for malicious software."* The command above removes the flag. If you'd rather not use a terminal: try to open the app, then go to **System Settings → Privacy & Security** and hit **Open Anyway**.
+
+### 🍺 Option 2 — Homebrew
+
+```sh
+brew install --cask kikudjira/pingmate/pingmate
+```
+
+That's the whole thing — the tap is added for you and the quarantine flag is cleared automatically. Upgrades later:
+
+```sh
+brew upgrade --cask pingmate
+```
+
+> **Use the full name.** With the short `brew install --cask pingmate`, Homebrew refuses to load a cask from a tap you haven't trusted and you'd need `brew trust kikudjira/pingmate` first.
 
 ## Using it
 
