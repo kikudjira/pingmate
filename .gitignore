@@ -10,8 +10,9 @@ DerivedData/
 *.moved-aside
 **/xcuserdata/
 
-# Editors / local tooling
-.claude/
+# Editors / local tooling — but the release skill is part of the project
+.claude/*
+!.claude/skills/
 .vscode/
 .idea/
 
