@@ -21,12 +21,12 @@ A native macOS menu bar app, written in Swift and SwiftUI.
 
 ## Features
 
-- 🟢 **A dot that changes colour** — green, yellow, red. That's the whole interface, most days.
-- 💍 **Recovery rings** — a green dot with a red ring means it just came back. Blinks you missed still leave a trace.
+- <img src="docs/icons/dot-green.png" height="13" alt="" /> **A dot that changes colour** — green, yellow, red. That's the whole interface, most days.
+- <img src="docs/icons/ring-green-red.png" height="13" alt="" /> **Recovery rings** — a green dot wearing a red ring means it just came back. Blinks you missed still leave a trace.
 - 📈 **Latency sparkline** in the popover and the history window.
 - 📜 **History** with status filters, ⌘C on selected rows, and CSV export.
 - 🎨 **Your thresholds, your colours.**
-- 🚀 **Launch at login**, one checkbox.
+- 🚀 **Launch at login** — asked once on first run, and a checkbox in Settings after that.
 
 ## Install
 
@@ -55,10 +55,18 @@ Or open **System Settings → Privacy & Security** and hit **Open Anyway**. The 
 
 | Dot | Meaning | Default |
 |-----|---------|---------|
-| 🟢 Green | Good | reply in ≤ 50 ms |
-| 🟡 Yellow | Unstable | reply in ≤ 250 ms |
-| 🔴 Red | Problem | slower than that, or no reply |
+| <img src="docs/icons/dot-green.png" height="12" alt="" /> Green | Good | reply in ≤ 50 ms |
+| <img src="docs/icons/dot-yellow.png" height="12" alt="" /> Yellow | Unstable | reply in ≤ 250 ms |
+| <img src="docs/icons/dot-red.png" height="12" alt="" /> Red | Problem | slower than that, or no reply |
 | ⚪️ White | Paused | not monitoring |
+
+And the rings, which show for five seconds after things improve:
+
+| Ring | Came back from |
+|------|----------------|
+| <img src="docs/icons/ring-green-yellow.png" height="12" alt="" /> Green in yellow | unstable → good |
+| <img src="docs/icons/ring-green-red.png" height="12" alt="" /> Green in red | problem → good |
+| <img src="docs/icons/ring-yellow-red.png" height="12" alt="" /> Yellow in red | problem → unstable |
 
 <p align="center">
   <img src="docs/screenshots/history.png" width="560" alt="History window with filters and sparkline" />
