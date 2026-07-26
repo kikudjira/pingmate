@@ -31,8 +31,7 @@ A native macOS menu bar app, written in Swift and SwiftUI.
 ## Install
 
 ```sh
-brew tap kikudjira/pingmate https://github.com/kikudjira/pingmate
-brew install --cask pingmate
+brew install --cask kikudjira/pingmate/pingmate
 ```
 
 Or grab the DMG from the [latest release](https://github.com/kikudjira/pingmate/releases/latest) and drag PingMate to Applications — then read the next bit, because macOS is about to be dramatic.

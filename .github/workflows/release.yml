@@ -63,27 +63,20 @@ jobs:
             --title "PingMate ${{ steps.version.outputs.version }}" \
             --generate-notes
 
-      - name: Point the cask at the new release
-        if: github.event_name == 'push'
+      # The cask lives in kikudjira/homebrew-pingmate and is bumped by hand, so
+      # the run leaves the two lines that change ready to copy.
+      - name: Cask bump instructions
         env:
           VERSION: ${{ steps.version.outputs.version }}
           SHA256: ${{ steps.dmg.outputs.sha256 }}
         run: |
-          BRANCH="${{ github.event.repository.default_branch }}"
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # The tag build starts detached; move to the branch the cask lives on.
-          git fetch origin "$BRANCH"
-          git checkout "$BRANCH"
+          cat >> "$GITHUB_STEP_SUMMARY" <<SUMMARY
+          ## Homebrew cask
 
-          /usr/bin/sed -i '' \
-            -e "s/^  version \".*\"/  version \"$VERSION\"/" \
-            -e "s/^  sha256 \".*\"/  sha256 \"$SHA256\"/" \
-            Casks/pingmate.rb
+          Update \`Casks/pingmate.rb\` in [homebrew-pingmate](https://github.com/kikudjira/homebrew-pingmate):
 
-          if git diff --quiet Casks/pingmate.rb; then
-            echo "Cask already current."
-          else
-            git commit -m "chore: cask -> $VERSION" Casks/pingmate.rb
-            git push origin "HEAD:$BRANCH"
-          fi
+          \`\`\`ruby
+            version "$VERSION"
+            sha256 "$SHA256"
+          \`\`\`
+          SUMMARY
