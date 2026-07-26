@@ -37,7 +37,47 @@ class StatusBarController: NSObject, ObservableObject {
         // Start monitoring
         pingService.start()
 
+        askAboutLoginItemIfNeeded()
+
         Log.tray.info("StatusBarController initialized")
+    }
+
+    /// First launch only: offer to start with the system. Deferred by a beat so the menu bar icon
+    /// is on screen when the alert appears — otherwise the question arrives with nothing to
+    /// attach it to.
+    private func askAboutLoginItemIfNeeded() {
+        guard settingsStorage.shouldAskAboutLoginItem else { return }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+            guard let self, self.settingsStorage.shouldAskAboutLoginItem else { return }
+
+            let alert = NSAlert()
+            alert.messageText = "Start PingMate at login?"
+            alert.informativeText = "PingMate lives in the menu bar and only watches your connection. "
+                + "You can change this any time in Settings."
+            alert.alertStyle = .informational
+            alert.addButton(withTitle: "Start at Login")
+            alert.addButton(withTitle: "Not Now")
+
+            // An accessory app has no windows to bring forward, so the alert would otherwise
+            // open behind whatever the user is looking at.
+            NSApp.activate(ignoringOtherApps: true)
+
+            if alert.runModal() == .alertFirstButtonReturn {
+                if !self.settingsStorage.enableLoginItemFromPrompt() {
+                    let failure = NSAlert()
+                    failure.messageText = "Could not add PingMate to Login Items"
+                    failure.informativeText = "macOS declined the request. You can add it yourself in "
+                        + "System Settings → General → Login Items."
+                    failure.alertStyle = .warning
+                    failure.runModal()
+                }
+            } else {
+                self.settingsStorage.markLoginItemAsked()
+            }
+
+            NSApp.setActivationPolicy(.accessory)
+        }
     }
 
     private func setupStatusItem() {

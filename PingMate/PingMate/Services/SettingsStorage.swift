@@ -21,6 +21,7 @@ class SettingsStorage: ObservableObject {
 
     private let defaults = UserDefaults.standard
     private let settingsKey = "PingMateSettings"
+    private let loginPromptKey = "PingMateDidAskAboutLoginItem"
 
     /// The login-item state we last successfully applied, so `save()` only talks to
     /// `SMAppService` when the toggle actually moved.
@@ -76,6 +77,38 @@ class SettingsStorage: ObservableObject {
         settings = Settings()
         try save()
         Log.settings.info("Settings reset to defaults")
+    }
+
+    /// True until the login-item question has been put to the user once. Asking again after a
+    /// "no" would be nagging, and asking after the toggle has been used at all would be noise.
+    var shouldAskAboutLoginItem: Bool {
+        guard !defaults.bool(forKey: loginPromptKey) else { return false }
+        // A login item can already exist from an earlier install: don't ask about a setting
+        // that is visibly already on.
+        guard SMAppService.mainApp.status != .enabled else {
+            markLoginItemAsked()
+            return false
+        }
+        return !settings.startAtLogin
+    }
+
+    func markLoginItemAsked() {
+        defaults.set(true, forKey: loginPromptKey)
+    }
+
+    /// Turns the login item on in response to the first-launch prompt. Returns whether it stuck —
+    /// an ad-hoc signed build is exactly the kind that `SMAppService` can refuse.
+    @discardableResult
+    func enableLoginItemFromPrompt() -> Bool {
+        markLoginItemAsked()
+        settings.startAtLogin = true
+        do {
+            try save()
+            return true
+        } catch {
+            Log.settings.error("Login item declined by the system: \(error.localizedDescription)")
+            return false
+        }
     }
 
     private func persist() {
