@@ -29,14 +29,29 @@ enum Tokens {
         static let monitorWindow = CGSize(width: 560, height: 640)
         static let monitorWindowMin = CGSize(width: 480, height: 420)
         static let settingsWindowWidth: CGFloat = 400
+        /// Threshold fields share one width, and every number field one unit column, so "s"
+        /// and "ms" do not shift the fields against each other.
+        static let numberField: CGFloat = 72
+        static let unitColumn: CGFloat = 20
+        /// The value column on the right of Settings: field, unit and stepper together, and
+        /// the retention pop-up at the same width, so every value control shares both edges.
+        static let valueColumn: CGFloat = 126
+        /// The interval only ever holds "0.5" to "60", so its field is sized to that and not
+        /// to the threshold fields.
+        static let intervalField: CGFloat = 44
+        /// Fill that lifts a control off a glass card by the same step the system text
+        /// fields use (#4A494E card → #59585B field, measured). Behind the hand-built
+        /// retention button; the native pop-up's bezel came out a step lighter than the fields.
+        static let controlFill = Color.white.opacity(0.08)
         /// Minimum equals the height the whole form needs, so the settings window cannot be
         /// shrunk into a scrolling state. The `ScrollView` behind it only earns its keep on a
         /// display too short for the form, or when inline errors push it over.
         /// Content height, not window height — a titlebar adds ~28pt on top. The form
-        /// measures 567pt plus a 38pt pinned footer, so nothing scrolls at this size.
+        /// measures ~585pt (567pt before the history cost line) plus a 38pt pinned footer,
+        /// so nothing scrolls at this size.
         /// Applied via `contentMinSize`, since `minSize` counts the titlebar too and let the
         /// footer be clipped.
-        static let settingsWindowMin = CGSize(width: 400, height: 620)
+        static let settingsWindowMin = CGSize(width: 400, height: 640)
     }
 
     enum Sparkline {
@@ -51,6 +66,21 @@ enum Tokens {
         /// Timeouts draw at full height, dimmed — off the scale rather than a missing bar.
         static let timeoutOpacity: Double = 0.3
     }
+
+    /// Three text sizes. There were five in the History window alone, and a stat read 15pt in
+    /// the popover and 13pt in the window.
+    enum TextSize {
+        /// Numbers in the stat tiles.
+        static let value: CGFloat = 15
+        /// Anything clicked or read: buttons, chips, list rows and header, the period caption.
+        static let body: CGFloat = 12
+        /// Supporting captions: tile labels, sparkline, footers, hints, "Change…".
+        static let caption: CGFloat = 10
+    }
+
+    /// Height of every control that sits in a row with another — buttons, the filter chips,
+    /// the window's stat tiles — so a row lines up.
+    static let controlHeight: CGFloat = 33
 
     /// How long a recovery ring stays on the menubar icon.
     static let statusTransitionDuration: TimeInterval = 5

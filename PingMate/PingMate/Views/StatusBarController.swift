@@ -23,7 +23,8 @@ class StatusBarController: NSObject, ObservableObject {
 
         self.monitorWindowController = MonitorWindowController(
             pingService: pingService,
-            settingsStorage: settingsStorage
+            settingsStorage: settingsStorage,
+            onOpenSettings: { [weak self] in self?.openSettingsWindow() }
         )
         self.settingsWindowController = SettingsWindowController(
             settingsStorage: settingsStorage,

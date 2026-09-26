@@ -54,7 +54,7 @@ struct Sparkline: View {
                 Text(String(format: "peak %.0f ms", peak))
             }
         }
-        .font(.caption2)
+        .font(.system(size: Tokens.TextSize.caption))
         .foregroundStyle(.tertiary)
     }
 

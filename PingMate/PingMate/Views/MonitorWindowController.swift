@@ -6,10 +6,12 @@ class MonitorWindowController: NSObject {
     private var window: NSWindow?
     private let pingService: PingService
     private let settingsStorage: SettingsStorage
+    private let onOpenSettings: () -> Void
 
-    init(pingService: PingService, settingsStorage: SettingsStorage) {
+    init(pingService: PingService, settingsStorage: SettingsStorage, onOpenSettings: @escaping () -> Void) {
         self.pingService = pingService
         self.settingsStorage = settingsStorage
+        self.onOpenSettings = onOpenSettings
         super.init()
     }
 
@@ -22,7 +24,8 @@ class MonitorWindowController: NSObject {
 
         let contentView = MonitorWindowView(
             pingService: pingService,
-            settingsStorage: settingsStorage
+            settingsStorage: settingsStorage,
+            onOpenSettings: onOpenSettings
         )
 
         let window = NSWindow(

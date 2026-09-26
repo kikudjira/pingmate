@@ -14,12 +14,12 @@ struct GlassButton: View {
                 Image(systemName: systemImage)
                     .font(.system(size: 12))
                 Text(title)
-                    .font(.system(size: 12, weight: .medium))
+                    .font(.system(size: Tokens.TextSize.body, weight: .medium))
             }
             .foregroundStyle(muted ? AnyShapeStyle(.secondary) : AnyShapeStyle(.primary))
             .lineLimit(1)
-            .padding(.vertical, 9)
             .padding(.horizontal, Tokens.Space.x3)
+            .frame(height: Tokens.controlHeight)
             .frame(maxWidth: fills ? .infinity : nil)
             .contentShape(.rect)
             .glassCard(cornerRadius: Tokens.Radius.small, interactive: true)
@@ -39,7 +39,7 @@ struct GlassIconButton: View {
             Image(systemName: systemImage)
                 .font(.system(size: 12))
                 .foregroundStyle(.primary)
-                .frame(width: 33, height: 33)
+                .frame(width: Tokens.controlHeight, height: Tokens.controlHeight)
                 .contentShape(.rect)
                 .glassCard(cornerRadius: Tokens.Radius.small, interactive: true)
         }
@@ -61,7 +61,7 @@ struct StatusPill: View {
                 .opacity(result.isSuccess ? 1 : 0.55)
                 .frame(width: 7, height: 7)
             Text(result.statusText)
-                .font(.caption)
+                .font(.system(size: Tokens.TextSize.body))
                 .foregroundStyle(.secondary)
         }
         .accessibilityElement(children: .combine)
@@ -81,6 +81,7 @@ struct StatusFilterChips: View {
             }
         }
         .padding(2)
+        .frame(height: Tokens.controlHeight)
         .glassCard(cornerRadius: Tokens.Radius.small)
     }
 
@@ -96,11 +97,11 @@ struct StatusFilterChips: View {
                         .frame(width: 7, height: 7)
                 }
                 Text(title)
-                    .font(.system(size: 11, weight: isSelected ? .medium : .regular))
+                    .font(.system(size: Tokens.TextSize.body, weight: isSelected ? .medium : .regular))
             }
             .foregroundStyle(isSelected ? AnyShapeStyle(.primary) : AnyShapeStyle(.secondary))
-            .padding(.vertical, 5)
             .padding(.horizontal, Tokens.Space.x2)
+            .frame(maxHeight: .infinity)
             .contentShape(.rect)
             .background {
                 if isSelected {

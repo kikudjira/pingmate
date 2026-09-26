@@ -142,7 +142,7 @@ struct SettingsTabView: View {
                 ColorSwatch(hex: $editedSettings.iconColors.problem, onChange: autoSave)
                 Text("Problem")
                 Spacer()
-                Text("anything slower, or no reply")
+                Text("slower or no reply")
                     .font(.caption2)
                     .foregroundStyle(.tertiary)
             }
@@ -172,27 +172,63 @@ struct SettingsTabView: View {
     private var historySection: some View {
         SettingsSection(title: "History") {
             SettingRow(title: "Keep history for") {
-                Picker("", selection: $editedSettings.historyRetention) {
-                    ForEach(HistoryRetention.allCases) { retention in
-                        Text(retention.localizedName).tag(retention)
+                // A hand-built button around the menu: the native pop-up drew its own bezel a
+                // step lighter than the text fields, and borderless it centred the title with
+                // the chevrons glued to it. This one matches the fields and the design — title
+                // on the left, chevrons on the right edge.
+                Menu {
+                    Picker(selection: $editedSettings.historyRetention) {
+                        ForEach(HistoryRetention.allCases) { retention in
+                            let fits = retention.fits(interval: editedSettings.pingInterval)
+                            (Text(retention.localizedName)
+                                + Text(fits
+                                    ? "  \(retention.entries(atInterval: editedSettings.pingInterval).formatted()) pings"
+                                    : "  needs \(StatusHeadline.intervalText(retention.minimumInterval)) interval")
+                                .foregroundStyle(.secondary))
+                                .tag(retention)
+                                .selectionDisabled(!fits)
+                        }
+                    } label: {
+                        EmptyView()
                     }
+                    .pickerStyle(.inline)
+                    .labelsHidden()
+                } label: {
+                    HStack(spacing: Tokens.Space.x1) {
+                        Text(editedSettings.historyRetention.localizedName)
+                        Spacer(minLength: 0)
+                        Image(systemName: "chevron.up.chevron.down")
+                            .font(.system(size: 10, weight: .semibold))
+                            .foregroundStyle(.secondary)
+                    }
+                    .padding(.horizontal, Tokens.Space.x2)
+                    .frame(width: Tokens.Size.valueColumn, height: 26)
+                    .background(Tokens.Size.controlFill, in: .rect(cornerRadius: Tokens.Radius.small))
+                    .contentShape(.rect)
                 }
-                .labelsHidden()
-                .frame(width: 120)
+                .menuStyle(.button)
+                .buttonStyle(.plain)
+                .menuIndicator(.hidden)
+                .fixedSize()
                 .onChange(of: editedSettings.historyRetention) { _, _ in autoSave() }
             }
 
-            Text(retentionEstimate)
-                .font(.caption2)
-                .foregroundStyle(.tertiary)
+            VStack(alignment: .leading, spacing: Tokens.Space.x1) {
+                Label(retentionEstimate, systemImage: "memorychip")
+                Label("Kept in memory only — cleared when PingMate quits", systemImage: "info.circle")
+            }
+            .font(.caption2)
+            .foregroundStyle(.tertiary)
         }
     }
 
-    /// Spells out what the retention window means at the current interval — the old fixed
-    /// 10 000-entry cap silently meant anything from 1.4 h to 14 h depending on it.
+    /// What the period costs at the current interval. Memory is the entry count times the
+    /// in-memory size of one result; the target string is shared between entries, not copied.
     private var retentionEstimate: String {
-        let entries = Int(editedSettings.historyRetention.duration / (Double(editedSettings.pingInterval) / 1000))
-        return "≈ \(entries.formatted()) entries at the current \(StatusHeadline.intervalText(editedSettings.pingInterval)) interval"
+        let entries = editedSettings.historyRetention.entries(atInterval: editedSettings.pingInterval)
+        let bytes = Int64(entries * MemoryLayout<PingResult>.stride)
+        let memory = bytes.formatted(.byteCount(style: .memory))
+        return "≈ \(entries.formatted()) pings · about \(memory)"
     }
 
     private var systemSection: some View {
@@ -219,6 +255,10 @@ struct SettingsTabView: View {
     // MARK: - Saving
 
     private func autoSave() {
+        // A shorter interval can push the chosen period over the entry ceiling; step down to
+        // the longest period that still fits rather than refuse the interval.
+        editedSettings.historyRetention = editedSettings.historyRetention.clamped(toInterval: editedSettings.pingInterval)
+
         fieldErrors = [:]
         for error in editedSettings.validate() {
             fieldErrors[error.field] = error.message

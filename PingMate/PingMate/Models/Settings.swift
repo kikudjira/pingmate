@@ -1,24 +1,64 @@
 import Foundation
 
-/// How long ping results are kept in history.
+/// How long ping results are kept in history — and so the period every statistic covers.
+///
+/// Raw values are seconds and are what gets persisted. A value that is not a case any more
+/// (3 hours was dropped) decodes to the default in `Settings.init(from:)` instead of failing.
 enum HistoryRetention: Int, Codable, CaseIterable, Identifiable {
+    case fifteenMinutes = 900
+    case thirtyMinutes = 1800
     case oneHour = 3600
-    case threeHours = 10800
+    case twoHours = 7200
+    case fourHours = 14400
+    case sixHours = 21600
+    case eightHours = 28800
     case twelveHours = 43200
     case oneDay = 86400
 
+    /// Ceiling on retained entries, whatever the period. It is what the list, the export and the
+    /// per-tick bookkeeping scale with, so a preset that would exceed it at the current interval
+    /// is not offered.
+    static let maxEntries = 100_000
+
     var id: Int { rawValue }
 
+    var duration: TimeInterval { TimeInterval(rawValue) }
+
+    /// "15 minutes", "1 hour", "24 hours".
     var localizedName: String {
-        switch self {
-        case .oneHour: return "1 hour"
-        case .threeHours: return "3 hours"
-        case .twelveHours: return "12 hours"
-        case .oneDay: return "24 hours"
-        }
+        let minutes = rawValue / 60
+        if minutes < 60 { return "\(minutes) minutes" }
+        let hours = minutes / 60
+        return hours == 1 ? "1 hour" : "\(hours) hours"
     }
 
-    var duration: TimeInterval { TimeInterval(rawValue) }
+    /// "15 min", "1 h" — for the "Last 42 min of 1 h" label while the window is still filling.
+    var abbreviatedName: String {
+        let minutes = rawValue / 60
+        return minutes < 60 ? "\(minutes) min" : "\(minutes / 60) h"
+    }
+
+    /// How many pings the period holds at the given interval.
+    func entries(atInterval milliseconds: Int) -> Int {
+        Int(duration * 1000 / Double(max(milliseconds, 1)))
+    }
+
+    func fits(interval milliseconds: Int) -> Bool {
+        entries(atInterval: milliseconds) <= Self.maxEntries
+    }
+
+    /// Shortest interval at which this period fits, rounded up to the 0.5 s step Settings uses.
+    var minimumInterval: Int {
+        let exact = duration * 1000 / Double(Self.maxEntries)
+        return Int((exact / 500).rounded(.up)) * 500
+    }
+
+    /// This period, or the longest one that still fits when the interval got shorter.
+    func clamped(toInterval milliseconds: Int) -> HistoryRetention {
+        fits(interval: milliseconds)
+            ? self
+            : Self.allCases.last { $0.fits(interval: milliseconds) } ?? .fifteenMinutes
+    }
 }
 
 struct Settings: Codable, Equatable {
@@ -27,7 +67,7 @@ struct Settings: Codable, Equatable {
     var goodPingThreshold: Int = 50  // ms
     var unstablePingThreshold: Int = 250  // ms
     var startAtLogin: Bool = false
-    var historyRetention: HistoryRetention = .threeHours
+    var historyRetention: HistoryRetention = .oneHour
 
     struct IconColors: Codable, Equatable {
         var good: String = "#559C24"
@@ -71,7 +111,11 @@ struct Settings: Codable, Equatable {
         goodPingThreshold = try container.decodeIfPresent(Int.self, forKey: .goodPingThreshold) ?? defaults.goodPingThreshold
         unstablePingThreshold = try container.decodeIfPresent(Int.self, forKey: .unstablePingThreshold) ?? defaults.unstablePingThreshold
         startAtLogin = try container.decodeIfPresent(Bool.self, forKey: .startAtLogin) ?? defaults.startAtLogin
-        historyRetention = try container.decodeIfPresent(HistoryRetention.self, forKey: .historyRetention) ?? defaults.historyRetention
+        // Decoded as a plain number: a stored period that is no longer offered would make the
+        // enum decode throw, and that would take every other setting down with it.
+        let retentionSeconds = try container.decodeIfPresent(Int.self, forKey: .historyRetention)
+        historyRetention = (retentionSeconds.flatMap(HistoryRetention.init(rawValue:)) ?? defaults.historyRetention)
+            .clamped(toInterval: pingInterval)
         iconColors = try container.decodeIfPresent(IconColors.self, forKey: .iconColors) ?? defaults.iconColors
     }
 
