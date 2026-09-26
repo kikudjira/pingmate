@@ -43,11 +43,12 @@ enum Tokens {
         /// shrunk into a scrolling state. The `ScrollView` behind it only earns its keep on a
         /// display too short for the form, or when inline errors push it over.
         /// Content height, not window height — a titlebar adds ~28pt on top. The form
-        /// is a grouped `Form` of ~630pt plus a ~50pt pinned footer, so nothing scrolls at
-        /// this size.
+        /// is a grouped `Form` of ~590pt plus a ~50pt pinned footer (measured: 20pt under the
+        /// last group at this height), so nothing scrolls and nothing is left empty. The
+        /// window also opens at this height, whatever size the autosave remembers.
         /// Applied via `contentMinSize`, since `minSize` counts the titlebar too and let the
         /// footer be clipped.
-        static let settingsWindowMin = CGSize(width: 400, height: 680)
+        static let settingsWindowMin = CGSize(width: 400, height: 640)
         /// Upper bound for the History window's status filter, so a segmented control that
         /// ignores `fixedSize` still leaves room for Export.
         static let statusFilterMaxWidth: CGFloat = 340
