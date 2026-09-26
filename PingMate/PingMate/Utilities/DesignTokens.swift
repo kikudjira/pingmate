@@ -33,10 +33,11 @@ enum Tokens {
         /// shrunk into a scrolling state. The `ScrollView` behind it only earns its keep on a
         /// display too short for the form, or when inline errors push it over.
         /// Content height, not window height — a titlebar adds ~28pt on top. The form
-        /// measures 567pt plus a 38pt pinned footer, so nothing scrolls at this size.
+        /// measures ~585pt (567pt before the history cost line) plus a 38pt pinned footer,
+        /// so nothing scrolls at this size.
         /// Applied via `contentMinSize`, since `minSize` counts the titlebar too and let the
         /// footer be clipped.
-        static let settingsWindowMin = CGSize(width: 400, height: 620)
+        static let settingsWindowMin = CGSize(width: 400, height: 640)
     }
 
     enum Sparkline {

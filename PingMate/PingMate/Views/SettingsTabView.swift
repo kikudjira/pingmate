@@ -172,27 +172,47 @@ struct SettingsTabView: View {
     private var historySection: some View {
         SettingsSection(title: "History") {
             SettingRow(title: "Keep history for") {
-                Picker("", selection: $editedSettings.historyRetention) {
-                    ForEach(HistoryRetention.allCases) { retention in
-                        Text(retention.localizedName).tag(retention)
+                // A menu around an inline picker rather than a plain picker: a plain one puts
+                // the item's subtitle into the closed button as well. This way the button
+                // shows only the period, and the open menu shows the cost of each period
+                // and why an unavailable one is unavailable.
+                Menu(editedSettings.historyRetention.localizedName) {
+                    Picker("", selection: $editedSettings.historyRetention) {
+                        ForEach(HistoryRetention.allCases) { retention in
+                            let fits = retention.fits(interval: editedSettings.pingInterval)
+                            VStack {
+                                Text(retention.localizedName)
+                                Text(fits
+                                    ? "\(retention.entries(atInterval: editedSettings.pingInterval).formatted()) pings"
+                                    : "Needs an interval of \(StatusHeadline.intervalText(retention.minimumInterval)) or longer")
+                            }
+                            .tag(retention)
+                            .disabled(!fits)
+                        }
                     }
+                    .pickerStyle(.inline)
+                    .labelsHidden()
                 }
-                .labelsHidden()
-                .frame(width: 120)
+                .fixedSize()
                 .onChange(of: editedSettings.historyRetention) { _, _ in autoSave() }
             }
 
-            Text(retentionEstimate)
-                .font(.caption2)
-                .foregroundStyle(.tertiary)
+            VStack(alignment: .leading, spacing: Tokens.Space.x1) {
+                Label(retentionEstimate, systemImage: "memorychip")
+                Label("Kept in memory only — cleared when PingMate quits", systemImage: "info.circle")
+            }
+            .font(.caption2)
+            .foregroundStyle(.tertiary)
         }
     }
 
-    /// Spells out what the retention window means at the current interval — the old fixed
-    /// 10 000-entry cap silently meant anything from 1.4 h to 14 h depending on it.
+    /// What the period costs at the current interval. Memory is the entry count times the
+    /// in-memory size of one result; the target string is shared between entries, not copied.
     private var retentionEstimate: String {
-        let entries = Int(editedSettings.historyRetention.duration / (Double(editedSettings.pingInterval) / 1000))
-        return "≈ \(entries.formatted()) entries at the current \(StatusHeadline.intervalText(editedSettings.pingInterval)) interval"
+        let entries = editedSettings.historyRetention.entries(atInterval: editedSettings.pingInterval)
+        let bytes = Int64(entries * MemoryLayout<PingResult>.stride)
+        let memory = bytes.formatted(.byteCount(style: .memory))
+        return "≈ \(entries.formatted()) pings at \(StatusHeadline.intervalText(editedSettings.pingInterval)) · about \(memory)"
     }
 
     private var systemSection: some View {
@@ -219,6 +239,10 @@ struct SettingsTabView: View {
     // MARK: - Saving
 
     private func autoSave() {
+        // A shorter interval can push the chosen period over the entry ceiling; step down to
+        // the longest period that still fits rather than refuse the interval.
+        editedSettings.historyRetention = editedSettings.historyRetention.clamped(toInterval: editedSettings.pingInterval)
+
         fieldErrors = [:]
         for error in editedSettings.validate() {
             fieldErrors[error.field] = error.message

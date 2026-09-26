@@ -9,21 +9,29 @@ class PingService: ObservableObject {
     @Published var history: [PingResult] = []
     @Published var isMonitoring: Bool = false
     @Published var consecutiveFailures: Int = 0
-    @Published var totalFailures: UInt64 = 0
-    @Published var totalPings: UInt64 = 0
 
     private(set) var settings: Settings
     private var currentPingTask: Task<Void, Never>?
 
-    /// Backstop so a short interval with a long retention cannot grow the array without bound.
-    /// 3 h at a 500 ms interval is ~21 600 entries, well under this.
-    private let maxHistoryHardCap = 50_000
+    // Running totals over `history`, kept in step with every insert and trim so the
+    // statistics cost nothing per tick even with the full 100 000 entries retained.
+    private var replySum: Double = 0
+    private var replyCount = 0
 
-    /// Average over the same window the history covers, so the number and the list agree.
+    // MARK: - Statistics
+    //
+    // Every number covers exactly what `history` holds — the retention period — so the tiles,
+    // the list and the export always agree. Session-long counters used to sit beside a
+    // window-scoped average with nothing telling them apart.
+
+    /// Pings in the retained period.
+    var pingCount: Int { history.count }
+
+    /// Pings in the retained period that got no reply at all. A slow reply is not a timeout.
+    var timeoutCount: Int { history.count - replyCount }
+
     var average: Double? {
-        let times = history.compactMap(\.pingTime)
-        guard !times.isEmpty else { return nil }
-        return times.reduce(0, +) / Double(times.count)
+        replyCount > 0 ? replySum / Double(replyCount) : nil
     }
 
     var formattedAverage: String {
@@ -31,8 +39,11 @@ class PingService: ObservableObject {
         return String(format: "%.0f ms", avg)
     }
 
-    var retentionDescription: String {
-        settings.historyRetention.localizedName
+    /// How much time the retained pings actually span — less than the retention period after
+    /// launch, a wake, or a clear.
+    var coveredDuration: TimeInterval {
+        guard let newest = history.first, let oldest = history.last else { return 0 }
+        return newest.timestamp.timeIntervalSince(oldest.timestamp) + Double(settings.pingInterval) / 1000
     }
 
     init(settings: Settings = Settings()) {
@@ -75,9 +86,9 @@ class PingService: ObservableObject {
 
     func clearHistory() {
         history.removeAll()
+        replySum = 0
+        replyCount = 0
         consecutiveFailures = 0
-        totalFailures = 0
-        totalPings = 0
     }
 
     /// One long-lived task instead of a chain of one-shot `Timer`s.
@@ -219,32 +230,44 @@ class PingService: ObservableObject {
         currentStatus = result.status
         lastPingTime = result.pingTime
 
-        // Session counters — deliberately unbounded. They describe the whole session,
-        // not the retained window, and cost 8 bytes each.
-        totalPings += 1
-
         if result.isSuccess {
             consecutiveFailures = 0
         } else {
             consecutiveFailures += 1
-            totalFailures += 1
         }
 
-        history.insert(result, at: 0)
-        trimHistory()
+        // One mutation of the published array per tick, so observers redraw once.
+        var updated = history
+        updated.insert(result, at: 0)
+        count(result, sign: 1)
+        trim(&updated)
+        history = updated
 
         Log.ping.debug("Ping result: \(result.formattedTime) - \(result.status.rawValue)")
     }
 
-    /// Drops entries older than the configured retention. History is newest-first,
-    /// so the expired ones are always at the tail.
     private func trimHistory() {
+        var updated = history
+        trim(&updated)
+        history = updated
+    }
+
+    /// Drops entries older than the retention period, then anything over the entry ceiling.
+    /// History is newest-first, so both come off the tail — walking from the tail touches only
+    /// what is removed, where a search from the head read the whole array every tick.
+    private func trim(_ entries: inout [PingResult]) {
         let cutoff = Date().addingTimeInterval(-settings.historyRetention.duration)
-        if let firstExpired = history.firstIndex(where: { $0.timestamp < cutoff }) {
-            history.removeSubrange(firstExpired...)
+        while let oldest = entries.last,
+              oldest.timestamp < cutoff || entries.count > HistoryRetention.maxEntries {
+            count(entries.removeLast(), sign: -1)
         }
-        if history.count > maxHistoryHardCap {
-            history.removeSubrange(maxHistoryHardCap...)
-        }
+    }
+
+    private func count(_ result: PingResult, sign: Double) {
+        guard let time = result.pingTime else { return }
+        replySum += sign * time
+        replyCount += Int(sign)
+        // Adding and subtracting for days leaves rounding residue; an empty window is exactly 0.
+        if replyCount == 0 { replySum = 0 }
     }
 }

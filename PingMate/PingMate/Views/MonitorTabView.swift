@@ -29,11 +29,18 @@ struct MonitorTabView: View {
                 Sparkline(history: pingService.history, colors: settings.iconColors)
             }
 
-            InlineStats(
-                average: pingService.formattedAverage,
-                timeouts: pingService.totalFailures,
-                pings: pingService.totalPings
-            )
+            VStack(alignment: .leading, spacing: Tokens.Space.x2) {
+                PeriodCaption(
+                    retention: settings.historyRetention,
+                    covered: pingService.coveredDuration,
+                    onChange: onOpenSettings
+                )
+                InlineStats(
+                    average: pingService.formattedAverage,
+                    timeouts: pingService.timeoutCount,
+                    pings: pingService.pingCount
+                )
+            }
 
             actions
         }
@@ -48,7 +55,7 @@ struct MonitorTabView: View {
             }
             Button("Cancel", role: .cancel) {}
         } message: {
-            Text("This also resets the average, timeout and ping counters.")
+            Text("The average, timeouts and pings are counted from this history and start over with it.")
         }
     }
 

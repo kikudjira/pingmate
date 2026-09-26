@@ -13,8 +13,8 @@ struct InlineStats: View {
     }
 
     let average: String
-    let timeouts: UInt64
-    let pings: UInt64
+    let timeouts: Int
+    let pings: Int
     var density: Density = .filling
 
     var body: some View {
@@ -42,5 +42,68 @@ struct InlineStats: View {
         .frame(maxWidth: density == .filling ? .infinity : nil)
         .glassCard(cornerRadius: Tokens.Radius.small)
         .accessibilityElement(children: .combine)
+    }
+}
+
+/// Names the period the statistics cover: "Last 1 hour", or "Last 42 min of 1 h" while the
+/// window is still filling after a launch, a wake or a clear.
+///
+/// Without it the numbers had no stated scope, and the list stopped growing for no visible
+/// reason once the retention period was full.
+struct PeriodCaption: View {
+    let retention: HistoryRetention
+    let covered: TimeInterval
+    /// Clock range of the retained pings, for the History window.
+    var range: ClosedRange<Date>?
+    var onChange: (() -> Void)?
+
+    var body: some View {
+        HStack(spacing: Tokens.Space.x1) {
+            Image(systemName: "clock.arrow.circlepath")
+                .foregroundStyle(.secondary)
+            Text(Self.title(retention: retention, covered: covered))
+                .fontWeight(.semibold)
+                .foregroundStyle(.secondary)
+            if let detail {
+                Text(detail)
+                    .foregroundStyle(.tertiary)
+            }
+            Spacer(minLength: Tokens.Space.x2)
+            if let onChange {
+                Button("Change…", action: onChange)
+                    .buttonStyle(.plain)
+                    .foregroundStyle(.tertiary)
+                    .help("Choose how long history is kept")
+            }
+        }
+        .font(.caption)
+        .lineLimit(1)
+    }
+
+    private var detail: String? {
+        if !Self.isFull(retention: retention, covered: covered) {
+            return "of \(retention.abbreviatedName)"
+        }
+        guard let range else { return nil }
+        return "· \(range.lowerBound.formatted(date: .omitted, time: .shortened)) – \(range.upperBound.formatted(date: .omitted, time: .shortened))"
+    }
+
+    /// A minute of slack, so a full window does not flicker back to "59 min" between trims.
+    static func isFull(retention: HistoryRetention, covered: TimeInterval) -> Bool {
+        covered >= retention.duration - 60
+    }
+
+    static func title(retention: HistoryRetention, covered: TimeInterval) -> String {
+        guard !isFull(retention: retention, covered: covered) else {
+            return "Last \(retention.localizedName)"
+        }
+        let minutes = Int(covered / 60)
+        switch minutes {
+        case ..<1: return "Last minute"
+        case ..<60: return "Last \(minutes) min"
+        default:
+            let rest = minutes % 60
+            return rest == 0 ? "Last \(minutes / 60) h" : "Last \(minutes / 60) h \(rest) min"
+        }
     }
 }

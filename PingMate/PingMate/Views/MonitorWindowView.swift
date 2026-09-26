@@ -7,6 +7,7 @@ struct MonitorWindowView: View {
     /// Observed rather than snapshotted: the window is created once and reused, so a copied-in
     /// `IconColors` stayed frozen at whatever the colours were on first open.
     @ObservedObject var settingsStorage: SettingsStorage
+    var onOpenSettings: () -> Void = {}
 
     @State private var statusFilter: ConnectionStatus?
     @State private var selection = Set<PingResult.ID>()
@@ -43,7 +44,7 @@ struct MonitorWindowView: View {
             }
             Button("Cancel", role: .cancel) {}
         } message: {
-            Text("This also resets the average, timeout and ping counters.")
+            Text("The average, timeouts and pings are counted from this history and start over with it.")
         }
     }
 
@@ -70,19 +71,32 @@ struct MonitorWindowView: View {
     }
 
     private var statsRow: some View {
-        HStack(spacing: Tokens.Space.x5) {
-            InlineStats(
-                average: pingService.formattedAverage,
-                timeouts: pingService.totalFailures,
-                pings: pingService.totalPings,
-                density: .hugging
+        VStack(alignment: .leading, spacing: Tokens.Space.x2) {
+            PeriodCaption(
+                retention: settings.historyRetention,
+                covered: pingService.coveredDuration,
+                range: retainedRange,
+                onChange: onOpenSettings
             )
-            Spacer(minLength: Tokens.Space.x3)
-            GlassButton(title: "Clear history", systemImage: "trash", muted: true) {
-                showClearConfirmation = true
+            HStack(spacing: Tokens.Space.x5) {
+                InlineStats(
+                    average: pingService.formattedAverage,
+                    timeouts: pingService.timeoutCount,
+                    pings: pingService.pingCount,
+                    density: .hugging
+                )
+                Spacer(minLength: Tokens.Space.x3)
+                GlassButton(title: "Clear history", systemImage: "trash", muted: true) {
+                    showClearConfirmation = true
+                }
+                .disabled(pingService.history.isEmpty)
             }
-            .disabled(pingService.history.isEmpty)
         }
+    }
+
+    private var retainedRange: ClosedRange<Date>? {
+        guard let newest = pingService.history.first, let oldest = pingService.history.last else { return nil }
+        return oldest.timestamp...newest.timestamp
     }
 
     private var toolbar: some View {
@@ -207,12 +221,18 @@ struct MonitorWindowView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
+    /// Says why the list stops growing: once the period is full, every new ping pushes the
+    /// oldest one out.
     private var footer: some View {
         HStack {
-            Text(selection.isEmpty ? "No rows selected" : "\(selection.count.formatted()) selected")
-            Spacer()
-            Text("⌘C copies selected rows")
+            Label(
+                "Pings older than \(settings.historyRetention.localizedName) are removed as new ones arrive",
+                systemImage: "info.circle"
+            )
+            Spacer(minLength: Tokens.Space.x3)
+            Text(selection.isEmpty ? "⌘C copies selected rows" : "\(selection.count.formatted()) selected · ⌘C copies")
         }
+        .lineLimit(1)
         .font(.caption2)
         .foregroundStyle(.tertiary)
     }
