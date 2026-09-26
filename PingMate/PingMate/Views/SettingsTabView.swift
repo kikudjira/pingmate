@@ -26,40 +26,31 @@ struct SettingsTabView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            // Indicators left on: at a short window height the last section really is below
-            // the fold, and hiding the scrollbar made it look like the form was cut off.
-            ScrollView(.vertical) {
-                // One container for all four cards: glass sampled per-card made the short
-                // System card read lighter than the rest.
-                GlassEffectContainer(spacing: Tokens.Space.x4) {
-                    VStack(alignment: .leading, spacing: Tokens.Space.x4) {
-                        networkSection
-                        thresholdsSection
-                        historySection
-                        systemSection
-                    }
-                }
-                .padding(Tokens.Space.x4)
-                .id(formGeneration)
+            // The system's grouped form — the layout System Settings uses — rather than glass
+            // cards: native section groups, row separators and controls, in both appearances.
+            Form {
+                networkSection
+                thresholdsSection
+                historySection
+                systemSection
             }
+            .formStyle(.grouped)
+            .id(formGeneration)
 
             Divider()
 
             // Pinned: the reset row used to live inside the ScrollView and scrolled out of reach.
             HStack {
                 Button("Reset to Defaults") { showResetConfirmation = true }
-                    .buttonStyle(.plain)
-                    .font(.caption)
-                    .foregroundStyle(isDefaults ? AnyShapeStyle(.tertiary) : AnyShapeStyle(.secondary))
                     .disabled(isDefaults)
 
                 Spacer()
 
                 Text("Changes save automatically")
-                    .font(.caption2)
-                    .foregroundStyle(.tertiary)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
             }
-            .padding(.horizontal, Tokens.Space.x4)
+            .padding(.horizontal, Tokens.Space.x5)
             .padding(.vertical, Tokens.Space.x3)
         }
         .confirmationDialog(
@@ -87,42 +78,32 @@ struct SettingsTabView: View {
     // MARK: - Sections
 
     private var networkSection: some View {
-        SettingsSection(title: "Network") {
-            VStack(alignment: .leading, spacing: Tokens.Space.x2) {
-                SettingRow(title: "Target") {
-                    HostField(host: $editedSettings.pingTarget, onCommit: autoSave)
-                        .frame(width: 190)
-                }
-                if let error = fieldErrors["pingTarget"] {
-                    FieldError(message: error)
-                } else {
-                    Text("IP address, hostname, or localhost")
-                        .font(.caption2)
-                        .foregroundStyle(.tertiary)
-                }
+        Section("Network") {
+            LabeledContent {
+                HostField(host: $editedSettings.pingTarget, onCommit: autoSave)
+                    .frame(width: 170)
+            } label: {
+                Text("Target")
+                // Short enough that the field stays on the label's line; localhost is a
+                // hostname too.
+                RowNote(error: fieldErrors["pingTarget"], hint: "IP address or hostname")
             }
 
-            VStack(alignment: .leading, spacing: Tokens.Space.x2) {
-                SettingRow(title: "Interval") {
-                    SecondsField(
-                        milliseconds: $editedSettings.pingInterval,
-                        range: 0.5...60,
-                        onCommit: autoSave
-                    )
-                }
-                if let error = fieldErrors["pingInterval"] {
-                    FieldError(message: error)
-                } else {
-                    Text("0.5 – 60 s, in steps of 0.5")
-                        .font(.caption2)
-                        .foregroundStyle(.tertiary)
-                }
+            LabeledContent {
+                SecondsField(
+                    milliseconds: $editedSettings.pingInterval,
+                    range: 0.5...60,
+                    onCommit: autoSave
+                )
+            } label: {
+                Text("Interval")
+                RowNote(error: fieldErrors["pingInterval"], hint: "0.5 – 60 s, in steps of 0.5")
             }
         }
     }
 
     private var thresholdsSection: some View {
-        SettingsSection(title: "Status Thresholds") {
+        Section("Status Thresholds") {
             thresholdRow(
                 title: "Good",
                 color: $editedSettings.iconColors.good,
@@ -138,13 +119,11 @@ struct SettingsTabView: View {
                 errorKey: "unstablePingThreshold"
             )
 
-            HStack(spacing: Tokens.Space.x3) {
-                ColorSwatch(hex: $editedSettings.iconColors.problem, onChange: autoSave)
-                Text("Problem")
-                Spacer()
+            LabeledContent {
                 Text("slower or no reply")
-                    .font(.caption2)
-                    .foregroundStyle(.tertiary)
+                    .foregroundStyle(.secondary)
+            } label: {
+                swatchLabel("Problem", color: $editedSettings.iconColors.problem)
             }
         }
     }
@@ -156,69 +135,55 @@ struct SettingsTabView: View {
         range: ClosedRange<Int>,
         errorKey: String
     ) -> some View {
-        VStack(alignment: .leading, spacing: Tokens.Space.x2) {
-            HStack(spacing: Tokens.Space.x3) {
-                ColorSwatch(hex: color, onChange: autoSave)
-                Text(title)
-                Spacer()
-                NumberField(value: value, range: range, suffix: "ms", step: 5, onCommit: autoSave)
-            }
+        LabeledContent {
+            NumberField(value: value, range: range, suffix: "ms", step: 5, onCommit: autoSave)
+        } label: {
+            swatchLabel(title, color: color)
             if let error = fieldErrors[errorKey] {
-                FieldError(message: error)
+                RowNote(error: error, hint: nil)
             }
         }
     }
 
-    private var historySection: some View {
-        SettingsSection(title: "History") {
-            SettingRow(title: "Keep history for") {
-                // A hand-built button around the menu: the native pop-up drew its own bezel a
-                // step lighter than the text fields, and borderless it centred the title with
-                // the chevrons glued to it. This one matches the fields and the design — title
-                // on the left, chevrons on the right edge.
-                Menu {
-                    Picker(selection: $editedSettings.historyRetention) {
-                        ForEach(HistoryRetention.allCases) { retention in
-                            let fits = retention.fits(interval: editedSettings.pingInterval)
-                            (Text(retention.localizedName)
-                                + Text(fits
-                                    ? "  \(retention.entries(atInterval: editedSettings.pingInterval).formatted()) pings"
-                                    : "  needs \(StatusHeadline.intervalText(retention.minimumInterval)) interval")
-                                .foregroundStyle(.secondary))
-                                .tag(retention)
-                                .selectionDisabled(!fits)
-                        }
-                    } label: {
-                        EmptyView()
-                    }
-                    .pickerStyle(.inline)
-                    .labelsHidden()
-                } label: {
-                    HStack(spacing: Tokens.Space.x1) {
-                        Text(editedSettings.historyRetention.localizedName)
-                        Spacer(minLength: 0)
-                        Image(systemName: "chevron.up.chevron.down")
-                            .font(.system(size: 10, weight: .semibold))
-                            .foregroundStyle(.secondary)
-                    }
-                    .padding(.horizontal, Tokens.Space.x2)
-                    .frame(width: Tokens.Size.valueColumn, height: 26)
-                    .background(Tokens.Size.controlFill, in: .rect(cornerRadius: Tokens.Radius.small))
-                    .contentShape(.rect)
-                }
-                .menuStyle(.button)
-                .buttonStyle(.plain)
-                .menuIndicator(.hidden)
-                .fixedSize()
-                .onChange(of: editedSettings.historyRetention) { _, _ in autoSave() }
-            }
+    private func swatchLabel(_ title: String, color: Binding<String>) -> some View {
+        HStack(spacing: Tokens.Space.x2) {
+            ColorSwatch(hex: color, onChange: autoSave)
+            Text(title)
+        }
+    }
 
+    private var historySection: some View {
+        Section {
+            // The native pop-up. `currentValueLabel` keeps the closed button to the period's
+            // name; each item carries its cost, or the interval it needs, after it.
+            Picker(selection: $editedSettings.historyRetention) {
+                ForEach(HistoryRetention.allCases) { retention in
+                    let fits = retention.fits(interval: editedSettings.pingInterval)
+                    (Text(retention.localizedName)
+                        + Text(fits
+                            ? "  \(retention.entries(atInterval: editedSettings.pingInterval).formatted()) pings"
+                            : "  needs \(StatusHeadline.intervalText(retention.minimumInterval)) interval")
+                        .foregroundStyle(.secondary))
+                        .tag(retention)
+                        .selectionDisabled(!fits)
+                }
+            } label: {
+                Text("Keep history for")
+            } currentValueLabel: {
+                Text(editedSettings.historyRetention.localizedName)
+            }
+            .pickerStyle(.menu)
+            .onChange(of: editedSettings.historyRetention) { _, _ in autoSave() }
+        } header: {
+            Text("History")
+        } footer: {
             VStack(alignment: .leading, spacing: Tokens.Space.x1) {
                 Label(retentionEstimate, systemImage: "memorychip")
                 Label("Kept in memory only — cleared when PingMate quits", systemImage: "info.circle")
             }
-            .font(.caption2)
-            .foregroundStyle(.tertiary)
+            .font(.caption)
+            .foregroundStyle(.secondary)
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
 
@@ -232,19 +197,16 @@ struct SettingsTabView: View {
     }
 
     private var systemSection: some View {
-        SettingsSection(title: "System") {
-            SettingRow(title: "Start at Login") {
-                Toggle("", isOn: $editedSettings.startAtLogin)
-                    .labelsHidden()
-                    .toggleStyle(.switch)
-                    .onChange(of: editedSettings.startAtLogin) { _, _ in autoSave() }
-                    // Storage re-reads the system every time this window opens; the form holds
-                    // its own draft and would otherwise keep showing a value the system dropped.
-                    .onChange(of: storage.settings.startAtLogin) { _, actual in
-                        guard editedSettings.startAtLogin != actual else { return }
-                        editedSettings.startAtLogin = actual
-                    }
-            }
+        Section("System") {
+            Toggle("Start at Login", isOn: $editedSettings.startAtLogin)
+                .toggleStyle(.switch)
+                .onChange(of: editedSettings.startAtLogin) { _, _ in autoSave() }
+                // Storage re-reads the system every time this window opens; the form holds
+                // its own draft and would otherwise keep showing a value the system dropped.
+                .onChange(of: storage.settings.startAtLogin) { _, actual in
+                    guard editedSettings.startAtLogin != actual else { return }
+                    editedSettings.startAtLogin = actual
+                }
 
             if let saveError {
                 FieldError(message: saveError)
@@ -298,7 +260,10 @@ struct HostField: View {
     @FocusState private var isFocused: Bool
 
     var body: some View {
-        TextField("8.8.8.8 or example.com", text: $text)
+        // Titled but label-hidden: inside a grouped form a field's title is drawn as a label
+        // beside it. The example goes in the prompt instead.
+        TextField("Target", text: $text, prompt: Text("8.8.8.8 or example.com"))
+            .labelsHidden()
             .textFieldStyle(.roundedBorder)
             .font(.body.monospacedDigit())
             .focused($isFocused)
@@ -342,4 +307,19 @@ struct HostField: View {
 #Preview {
     SettingsTabView(storage: SettingsStorage(), pingService: PingService())
         .frame(width: 400, height: 600)
+}
+
+/// Second line of a form row's label: the validation error when there is one, the hint
+/// otherwise. A grouped form renders a label's second text as the row's subtitle.
+private struct RowNote: View {
+    let error: String?
+    let hint: String?
+
+    var body: some View {
+        if let error {
+            Text(error).foregroundStyle(.red)
+        } else if let hint {
+            Text(hint)
+        }
+    }
 }

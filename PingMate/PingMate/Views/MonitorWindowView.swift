@@ -32,6 +32,8 @@ struct MonitorWindowView: View {
         }
         .padding(Tokens.Space.x4)
         .frame(minWidth: Tokens.Size.monitorWindowMin.width, minHeight: Tokens.Size.monitorWindowMin.height)
+        // A window, not the popover: system surfaces and controls, like System Settings.
+        .environment(\.surfaceStyle, .system)
         .background(WindowReader { hostWindow = $0 })
         .confirmationDialog(
             "Clear history?",

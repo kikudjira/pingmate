@@ -8,7 +8,22 @@ struct GlassButton: View {
     var fills: Bool = false
     let action: () -> Void
 
+    @Environment(\.surfaceStyle) private var surfaceStyle
+
     var body: some View {
+        if surfaceStyle == .system {
+            Button(action: action) {
+                Label(title, systemImage: systemImage)
+                    .frame(maxWidth: fills ? .infinity : nil)
+            }
+            .buttonStyle(.bordered)
+            .controlSize(.extraLarge)
+        } else {
+            glassButton
+        }
+    }
+
+    private var glassButton: some View {
         Button(action: action) {
             HStack(spacing: Tokens.Space.x1) {
                 Image(systemName: systemImage)
@@ -73,7 +88,35 @@ struct StatusFilterChips: View {
     @Binding var selection: ConnectionStatus?
     let colors: Settings.IconColors
 
+    @Environment(\.surfaceStyle) private var surfaceStyle
+
     var body: some View {
+        if surfaceStyle == .system {
+            // The native segmented control. Its segments draw images as templates, so the
+            // status dots do not carry over; the status column in the list still shows them.
+            Picker("Status", selection: $selection) {
+                Text("All").tag(ConnectionStatus?.none)
+                // Plain status names: segments share the widest label's width, and
+                // "Problem / Timeout" made all four too wide for the row. The list's Status
+                // column still tells a timeout from a slow reply.
+                ForEach(ConnectionStatus.filterable, id: \.self) { status in
+                    Text(status.localizedName)
+                        .tag(ConnectionStatus?.some(status))
+                }
+            }
+            .pickerStyle(.segmented)
+            .labelsHidden()
+            .controlSize(.extraLarge)
+            // A segmented control takes all the width it is offered; pinned to its content it
+            // leaves room for Export instead of pushing it out of the window.
+            .fixedSize()
+            .frame(maxWidth: Tokens.Size.statusFilterMaxWidth, alignment: .leading)
+        } else {
+            chips
+        }
+    }
+
+    private var chips: some View {
         HStack(spacing: 2) {
             chip(title: "All", status: nil)
             ForEach(ConnectionStatus.filterable, id: \.self) { status in

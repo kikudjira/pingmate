@@ -33,25 +33,24 @@ enum Tokens {
         /// and "ms" do not shift the fields against each other.
         static let numberField: CGFloat = 72
         static let unitColumn: CGFloat = 20
-        /// The value column on the right of Settings: field, unit and stepper together, and
-        /// the retention pop-up at the same width, so every value control shares both edges.
+        /// The value column on the right of Settings: field, unit and stepper together, so
+        /// the steppers and units of every number row line up.
         static let valueColumn: CGFloat = 126
         /// The interval only ever holds "0.5" to "60", so its field is sized to that and not
         /// to the threshold fields.
         static let intervalField: CGFloat = 44
-        /// Fill that lifts a control off a glass card by the same step the system text
-        /// fields use (#4A494E card → #59585B field, measured). Behind the hand-built
-        /// retention button; the native pop-up's bezel came out a step lighter than the fields.
-        static let controlFill = Color.white.opacity(0.08)
         /// Minimum equals the height the whole form needs, so the settings window cannot be
         /// shrunk into a scrolling state. The `ScrollView` behind it only earns its keep on a
         /// display too short for the form, or when inline errors push it over.
         /// Content height, not window height — a titlebar adds ~28pt on top. The form
-        /// measures ~585pt (567pt before the history cost line) plus a 38pt pinned footer,
-        /// so nothing scrolls at this size.
+        /// is a grouped `Form` of ~630pt plus a ~50pt pinned footer, so nothing scrolls at
+        /// this size.
         /// Applied via `contentMinSize`, since `minSize` counts the titlebar too and let the
         /// footer be clipped.
-        static let settingsWindowMin = CGSize(width: 400, height: 640)
+        static let settingsWindowMin = CGSize(width: 400, height: 680)
+        /// Upper bound for the History window's status filter, so a segmented control that
+        /// ignores `fixedSize` still leaves room for Export.
+        static let statusFilterMaxWidth: CGFloat = 340
     }
 
     enum Sparkline {
@@ -81,6 +80,9 @@ enum Tokens {
     /// Height of every control that sits in a row with another — buttons, the filter chips,
     /// the window's stat tiles — so a row lines up.
     static let controlHeight: CGFloat = 33
+    /// The same for the system-styled windows: the height of an `.extraLarge` bordered
+    /// button and segmented control on macOS 26 (measured 36pt).
+    static let systemControlHeight: CGFloat = 36
 
     /// How long a recovery ring stays on the menubar icon.
     static let statusTransitionDuration: TimeInterval = 5
@@ -92,10 +94,29 @@ private struct GlassEnabledKey: EnvironmentKey {
     static let defaultValue = true
 }
 
+/// What the shared surfaces and controls are drawn with.
+///
+/// The popover keeps Liquid Glass, as the system's own menubar popovers do. The History and
+/// Settings windows follow System Settings instead: a grouped fill on the window background
+/// and native controls, so they read like system windows in both appearances.
+enum SurfaceStyle {
+    case glass
+    case system
+}
+
+private struct SurfaceStyleKey: EnvironmentKey {
+    static let defaultValue = SurfaceStyle.glass
+}
+
 extension EnvironmentValues {
     var glassEnabled: Bool {
         get { self[GlassEnabledKey.self] }
         set { self[GlassEnabledKey.self] = newValue }
+    }
+
+    var surfaceStyle: SurfaceStyle {
+        get { self[SurfaceStyleKey.self] }
+        set { self[SurfaceStyleKey.self] = newValue }
     }
 }
 
@@ -105,9 +126,14 @@ struct GlassSurface: ViewModifier {
     var tint: Color?
 
     @Environment(\.glassEnabled) private var glassEnabled
+    @Environment(\.surfaceStyle) private var surfaceStyle
 
     func body(content: Content) -> some View {
-        if glassEnabled {
+        if surfaceStyle == .system {
+            // The fill System Settings puts behind a group: a shade darker than the white
+            // window in light mode, a shade lighter than #1E1E1E in dark.
+            content.background(Color(nsColor: .quaternarySystemFill), in: .rect(cornerRadius: cornerRadius))
+        } else if glassEnabled {
             content.glassEffect(glass, in: .rect(cornerRadius: cornerRadius))
         } else {
             content.background(.regularMaterial, in: .rect(cornerRadius: cornerRadius))

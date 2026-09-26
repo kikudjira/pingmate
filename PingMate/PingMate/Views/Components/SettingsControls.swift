@@ -1,47 +1,6 @@
 import SwiftUI
 import AppKit
 
-/// Titled group of settings on a glass card.
-struct SettingsSection<Content: View>: View {
-    let title: String
-    @ViewBuilder let content: Content
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: Tokens.Space.x2) {
-            Text(title.uppercased())
-                .font(.system(size: 11, weight: .semibold))
-                .kerning(0.6)
-                .foregroundStyle(.secondary)
-
-            VStack(alignment: .leading, spacing: Tokens.Space.x3) {
-                content
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(Tokens.Space.x4)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .glassCard()
-        }
-    }
-}
-
-/// Label on the left, control pinned to the right edge of the card.
-///
-/// `LabeledContent` places its content right after the label instead of spanning the row, so
-/// controls ended up floating mid-card and the switch looked glued to its own label.
-struct SettingRow<Content: View>: View {
-    let title: String
-    @ViewBuilder let content: Content
-
-    var body: some View {
-        HStack(spacing: Tokens.Space.x3) {
-            Text(title)
-            Spacer(minLength: Tokens.Space.x3)
-            content
-        }
-        .frame(maxWidth: .infinity)
-    }
-}
-
 /// Inline validation message under a field.
 struct FieldError: View {
     let message: String
