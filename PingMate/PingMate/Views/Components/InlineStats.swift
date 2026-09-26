@@ -28,17 +28,23 @@ struct InlineStats: View {
     }
 
     private func tile(value: String, label: String) -> some View {
-        VStack(spacing: 1) {
+        // Line boxes carry their own padding (~18pt for 15pt text, ~13pt for 10pt), so the
+        // negative spacing only closes empty space — it is what fits two lines into the
+        // window's control height.
+        VStack(spacing: density == .filling ? 1 : -3) {
             Text(value)
-                .font(.system(size: density == .filling ? 15 : 13, weight: .semibold).monospacedDigit())
+                .font(.system(size: Tokens.TextSize.value, weight: .semibold).monospacedDigit())
                 .foregroundStyle(.primary)
             Text(label)
-                .font(.caption2)
+                .font(.system(size: Tokens.TextSize.caption))
                 .foregroundStyle(.tertiary)
         }
         .lineLimit(1)
-        .padding(.vertical, density == .filling ? Tokens.Space.x2 : 7)
+        // In the window the tiles share a row with "Clear history", so they take the control
+        // height; the popover has them on a row of their own and gives them room.
+        .padding(.vertical, density == .filling ? Tokens.Space.x2 : 0)
         .padding(.horizontal, density == .filling ? Tokens.Space.x2 : Tokens.Space.x4)
+        .frame(height: density == .filling ? nil : Tokens.controlHeight)
         .frame(maxWidth: density == .filling ? .infinity : nil)
         .glassCard(cornerRadius: Tokens.Radius.small)
         .accessibilityElement(children: .combine)
@@ -72,20 +78,24 @@ struct PeriodCaption: View {
             if let onChange {
                 Button("Change…", action: onChange)
                     .buttonStyle(.plain)
+                    .font(.system(size: Tokens.TextSize.caption))
                     .foregroundStyle(.tertiary)
                     .help("Choose how long history is kept")
             }
         }
-        .font(.caption)
+        .font(.system(size: Tokens.TextSize.body))
         .lineLimit(1)
     }
 
     private var detail: String? {
+        var parts: [String] = []
         if !Self.isFull(retention: retention, covered: covered) {
-            return "of \(retention.abbreviatedName)"
+            parts.append("of \(retention.abbreviatedName)")
         }
-        guard let range else { return nil }
-        return "· \(range.lowerBound.formatted(date: .omitted, time: .shortened)) – \(range.upperBound.formatted(date: .omitted, time: .shortened))"
+        if let range {
+            parts.append("· \(range.lowerBound.formatted(date: .omitted, time: .shortened)) – \(range.upperBound.formatted(date: .omitted, time: .shortened))")
+        }
+        return parts.isEmpty ? nil : parts.joined(separator: " ")
     }
 
     /// A minute of slack, so a full window does not flicker back to "59 min" between trims.

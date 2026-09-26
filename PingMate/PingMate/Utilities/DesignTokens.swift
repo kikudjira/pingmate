@@ -53,6 +53,21 @@ enum Tokens {
         static let timeoutOpacity: Double = 0.3
     }
 
+    /// Three text sizes. There were five in the History window alone, and a stat read 15pt in
+    /// the popover and 13pt in the window.
+    enum TextSize {
+        /// Numbers in the stat tiles.
+        static let value: CGFloat = 15
+        /// Anything clicked or read: buttons, chips, list rows and header, the period caption.
+        static let body: CGFloat = 12
+        /// Supporting captions: tile labels, sparkline, footers, hints, "Change…".
+        static let caption: CGFloat = 10
+    }
+
+    /// Height of every control that sits in a row with another — buttons, the filter chips,
+    /// the window's stat tiles — so a row lines up.
+    static let controlHeight: CGFloat = 33
+
     /// How long a recovery ring stays on the menubar icon.
     static let statusTransitionDuration: TimeInterval = 5
 }

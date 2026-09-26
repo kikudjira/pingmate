@@ -176,7 +176,7 @@ struct SettingsTabView: View {
                 // the item's subtitle into the closed button as well. This way the button
                 // shows only the period, and the open menu shows the cost of each period
                 // and why an unavailable one is unavailable.
-                Menu(editedSettings.historyRetention.localizedName) {
+                Menu {
                     Picker("", selection: $editedSettings.historyRetention) {
                         ForEach(HistoryRetention.allCases) { retention in
                             let fits = retention.fits(interval: editedSettings.pingInterval)
@@ -192,8 +192,20 @@ struct SettingsTabView: View {
                     }
                     .pickerStyle(.inline)
                     .labelsHidden()
+                } label: {
+                    Text(editedSettings.historyRetention.localizedName)
                 }
-                .fixedSize()
+                // A menu draws a pull-down chevron; the up-down pair is what a pop-up picker —
+                // and the design — shows for choosing one value from a list.
+                .menuIndicator(.hidden)
+                .overlay(alignment: .trailing) {
+                    Image(systemName: "chevron.up.chevron.down")
+                        .font(.system(size: 9, weight: .semibold))
+                        .foregroundStyle(.secondary)
+                        .padding(.trailing, Tokens.Space.x2)
+                        .allowsHitTesting(false)
+                }
+                .frame(width: 130)
                 .onChange(of: editedSettings.historyRetention) { _, _ in autoSave() }
             }
 
@@ -212,7 +224,7 @@ struct SettingsTabView: View {
         let entries = editedSettings.historyRetention.entries(atInterval: editedSettings.pingInterval)
         let bytes = Int64(entries * MemoryLayout<PingResult>.stride)
         let memory = bytes.formatted(.byteCount(style: .memory))
-        return "≈ \(entries.formatted()) pings at \(StatusHeadline.intervalText(editedSettings.pingInterval)) · about \(memory)"
+        return "≈ \(entries.formatted()) pings · about \(memory)"
     }
 
     private var systemSection: some View {

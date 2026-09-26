@@ -163,7 +163,7 @@ struct MonitorWindowView: View {
             Text("Ping (ms)").frame(width: Self.pingWidth, alignment: .trailing)
             Text("Status").frame(width: Self.statusWidth, alignment: .trailing)
         }
-        .font(.system(size: 11, weight: .semibold))
+        .font(.system(size: Tokens.TextSize.body, weight: .semibold))
         .foregroundStyle(.secondary)
         .padding(.vertical, Tokens.Space.x2)
         .padding(.horizontal, Self.horizontalInset)
@@ -194,7 +194,7 @@ struct MonitorWindowView: View {
             StatusPill(result: result, colors: settings.iconColors)
                 .frame(width: Self.statusWidth, alignment: .trailing)
         }
-        .font(.callout)
+        .font(.system(size: Tokens.TextSize.body))
         .padding(.vertical, 5)
         .padding(.horizontal, Self.horizontalInset)
         .accessibilityElement(children: .combine)
@@ -233,7 +233,7 @@ struct MonitorWindowView: View {
             Text(selection.isEmpty ? "⌘C copies selected rows" : "\(selection.count.formatted()) selected · ⌘C copies")
         }
         .lineLimit(1)
-        .font(.caption2)
+        .font(.system(size: Tokens.TextSize.caption))
         .foregroundStyle(.tertiary)
     }
 
