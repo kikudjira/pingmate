@@ -222,7 +222,7 @@
                                   "fill": "$text-tertiary",
                                   "content": "8.8.8.8 · every 1s",
                                   "fontFamily": "$font",
-                                  "fontSize": 11,
+                                  "fontSize": 10,
                                   "fontWeight": "500"
                                 }
                               ]
@@ -576,7 +576,7 @@
                                   "fill": "$text-tertiary",
                                   "content": "last 32 pings",
                                   "fontFamily": "$font",
-                                  "fontSize": 11,
+                                  "fontSize": 10,
                                   "fontWeight": "normal"
                                 },
                                 {
@@ -586,7 +586,7 @@
                                   "fill": "$text-tertiary",
                                   "content": "peak 84 ms",
                                   "fontFamily": "$font",
-                                  "fontSize": 11,
+                                  "fontSize": 10,
                                   "fontWeight": "normal"
                                 }
                               ]
@@ -631,7 +631,7 @@
                                       "id": "P213HX",
                                       "name": "period",
                                       "fill": "$text-secondary",
-                                      "content": "Last 3 hours",
+                                      "content": "Last 1 hour",
                                       "fontFamily": "$font",
                                       "fontSize": 12,
                                       "fontWeight": "600"
@@ -645,7 +645,7 @@
                                   "fill": "$text-tertiary",
                                   "content": "Change…",
                                   "fontFamily": "$font",
-                                  "fontSize": 11,
+                                  "fontSize": 10,
                                   "fontWeight": "normal"
                                 }
                               ]
@@ -691,7 +691,7 @@
                                       "fill": "$text-tertiary",
                                       "content": "avg",
                                       "fontFamily": "$font",
-                                      "fontSize": 11,
+                                      "fontSize": 10,
                                       "fontWeight": "normal"
                                     }
                                   ]
@@ -730,7 +730,7 @@
                                       "fill": "$text-tertiary",
                                       "content": "timeouts",
                                       "fontFamily": "$font",
-                                      "fontSize": 11,
+                                      "fontSize": 10,
                                       "fontWeight": "normal"
                                     }
                                   ]
@@ -757,7 +757,7 @@
                                       "id": "wqsAu",
                                       "name": "v",
                                       "fill": "$text-primary",
-                                      "content": "10,800",
+                                      "content": "3,600",
                                       "fontFamily": "$font",
                                       "fontSize": 15,
                                       "fontWeight": "700"
@@ -769,7 +769,7 @@
                                       "fill": "$text-tertiary",
                                       "content": "pings",
                                       "fontFamily": "$font",
-                                      "fontSize": 11,
+                                      "fontSize": 10,
                                       "fontWeight": "normal"
                                     }
                                   ]
@@ -790,14 +790,15 @@
                               "id": "i0yTuQ",
                               "name": "Btn History",
                               "width": "fill_container",
+                              "height": 33,
                               "fill": "$card",
                               "cornerRadius": 10,
                               "stroke": "$card-stroke",
                               "strokeWidth": 1,
                               "gap": 6,
                               "padding": [
-                                9,
-                                14
+                                0,
+                                12
                               ],
                               "justifyContent": "center",
                               "alignItems": "center",
@@ -819,7 +820,7 @@
                                   "fill": "$text-primary",
                                   "content": "History",
                                   "fontFamily": "$font",
-                                  "fontSize": 13,
+                                  "fontSize": 12,
                                   "fontWeight": "600"
                                 }
                               ]
@@ -828,14 +829,15 @@
                               "type": "frame",
                               "id": "L8nqEv",
                               "name": "Btn Clear",
+                              "height": 33,
                               "fill": "$card",
                               "cornerRadius": 10,
                               "stroke": "$card-stroke",
                               "strokeWidth": 1,
                               "gap": 6,
                               "padding": [
-                                9,
-                                14
+                                0,
+                                12
                               ],
                               "justifyContent": "center",
                               "alignItems": "center",
@@ -857,7 +859,7 @@
                                   "fill": "$text-secondary",
                                   "content": "Clear",
                                   "fontFamily": "$font",
-                                  "fontSize": 13,
+                                  "fontSize": 12,
                                   "fontWeight": "600"
                                 }
                               ]
@@ -866,14 +868,15 @@
                               "type": "frame",
                               "id": "mbqbQ",
                               "name": "Btn Settings",
+                              "height": 33,
                               "fill": "$card",
                               "cornerRadius": 10,
                               "stroke": "$card-stroke",
                               "strokeWidth": 1,
                               "gap": 6,
                               "padding": [
-                                9,
-                                14
+                                0,
+                                12
                               ],
                               "justifyContent": "center",
                               "alignItems": "center",
@@ -1073,7 +1076,7 @@
                                   "fill": "$text-tertiary",
                                   "content": "8.8.8.8 · every 1s",
                                   "fontFamily": "$font",
-                                  "fontSize": 11,
+                                  "fontSize": 10,
                                   "fontWeight": "500"
                                 }
                               ]
@@ -1427,7 +1430,7 @@
                                   "fill": "$text-tertiary",
                                   "content": "last 32 pings",
                                   "fontFamily": "$font",
-                                  "fontSize": 11,
+                                  "fontSize": 10,
                                   "fontWeight": "normal"
                                 },
                                 {
@@ -1437,7 +1440,7 @@
                                   "fill": "$text-tertiary",
                                   "content": "peak 84 ms",
                                   "fontFamily": "$font",
-                                  "fontSize": 11,
+                                  "fontSize": 10,
                                   "fontWeight": "normal"
                                 }
                               ]
@@ -1492,7 +1495,7 @@
                                       "id": "j8Ral",
                                       "name": "hint",
                                       "fill": "$text-tertiary",
-                                      "content": "of 3 h",
+                                      "content": "of 1 h",
                                       "fontFamily": "$font",
                                       "fontSize": 12,
                                       "fontWeight": "normal"
@@ -1506,7 +1509,7 @@
                                   "fill": "$text-tertiary",
                                   "content": "Change…",
                                   "fontFamily": "$font",
-                                  "fontSize": 11,
+                                  "fontSize": 10,
                                   "fontWeight": "normal"
                                 }
                               ]
@@ -1552,7 +1555,7 @@
                                       "fill": "$text-tertiary",
                                       "content": "avg",
                                       "fontFamily": "$font",
-                                      "fontSize": 11,
+                                      "fontSize": 10,
                                       "fontWeight": "normal"
                                     }
                                   ]
@@ -1591,7 +1594,7 @@
                                       "fill": "$text-tertiary",
                                       "content": "timeouts",
                                       "fontFamily": "$font",
-                                      "fontSize": 11,
+                                      "fontSize": 10,
                                       "fontWeight": "normal"
                                     }
                                   ]
@@ -1630,7 +1633,7 @@
                                       "fill": "$text-tertiary",
                                       "content": "pings",
                                       "fontFamily": "$font",
-                                      "fontSize": 11,
+                                      "fontSize": 10,
                                       "fontWeight": "normal"
                                     }
                                   ]
@@ -1651,14 +1654,15 @@
                               "id": "htSn3",
                               "name": "Btn History",
                               "width": "fill_container",
+                              "height": 33,
                               "fill": "$card",
                               "cornerRadius": 10,
                               "stroke": "$card-stroke",
                               "strokeWidth": 1,
                               "gap": 6,
                               "padding": [
-                                9,
-                                14
+                                0,
+                                12
                               ],
                               "justifyContent": "center",
                               "alignItems": "center",
@@ -1680,7 +1684,7 @@
                                   "fill": "$text-primary",
                                   "content": "History",
                                   "fontFamily": "$font",
-                                  "fontSize": 13,
+                                  "fontSize": 12,
                                   "fontWeight": "600"
                                 }
                               ]
@@ -1689,14 +1693,15 @@
                               "type": "frame",
                               "id": "Klh9O",
                               "name": "Btn Clear",
+                              "height": 33,
                               "fill": "$card",
                               "cornerRadius": 10,
                               "stroke": "$card-stroke",
                               "strokeWidth": 1,
                               "gap": 6,
                               "padding": [
-                                9,
-                                14
+                                0,
+                                12
                               ],
                               "justifyContent": "center",
                               "alignItems": "center",
@@ -1718,7 +1723,7 @@
                                   "fill": "$text-secondary",
                                   "content": "Clear",
                                   "fontFamily": "$font",
-                                  "fontSize": 13,
+                                  "fontSize": 12,
                                   "fontWeight": "600"
                                 }
                               ]
@@ -1727,14 +1732,15 @@
                               "type": "frame",
                               "id": "X6nx2",
                               "name": "Btn Settings",
+                              "height": 33,
                               "fill": "$card",
                               "cornerRadius": 10,
                               "stroke": "$card-stroke",
                               "strokeWidth": 1,
                               "gap": 6,
                               "padding": [
-                                9,
-                                14
+                                0,
+                                12
                               ],
                               "justifyContent": "center",
                               "alignItems": "center",
@@ -1909,7 +1915,7 @@
                                       "fill": "$text-tertiary",
                                       "content": "8.8.8.8 · every 1s",
                                       "fontFamily": "$font",
-                                      "fontSize": 11,
+                                      "fontSize": 10,
                                       "fontWeight": "normal"
                                     }
                                   ]
@@ -2722,7 +2728,7 @@
                                   "fill": "$text-tertiary",
                                   "content": "last 84 pings",
                                   "fontFamily": "$font",
-                                  "fontSize": 11,
+                                  "fontSize": 10,
                                   "fontWeight": "normal"
                                 },
                                 {
@@ -2732,7 +2738,7 @@
                                   "fill": "$text-tertiary",
                                   "content": "peak 50 ms",
                                   "fontFamily": "$font",
-                                  "fontSize": 11,
+                                  "fontSize": 10,
                                   "fontWeight": "normal"
                                 }
                               ]
@@ -2777,7 +2783,7 @@
                                       "id": "P5DTNe",
                                       "name": "period",
                                       "fill": "$text-secondary",
-                                      "content": "Last 3 hours",
+                                      "content": "Last 1 hour",
                                       "fontFamily": "$font",
                                       "fontSize": 12,
                                       "fontWeight": "600"
@@ -2787,7 +2793,7 @@
                                       "id": "viwuT",
                                       "name": "range",
                                       "fill": "$text-tertiary",
-                                      "content": "· 16:15 – 19:15",
+                                      "content": "· 18:15 – 19:15",
                                       "fontFamily": "$font",
                                       "fontSize": 12,
                                       "fontWeight": "normal"
@@ -2801,7 +2807,7 @@
                                   "fill": "$text-tertiary",
                                   "content": "Change…",
                                   "fontFamily": "$font",
-                                  "fontSize": 11,
+                                  "fontSize": 10,
                                   "fontWeight": "normal"
                                 }
                               ]
@@ -2824,15 +2830,17 @@
                                       "type": "frame",
                                       "id": "VkgPR",
                                       "name": "Tile avg",
+                                      "height": 33,
                                       "fill": "$card",
                                       "cornerRadius": 9,
                                       "stroke": "$card-stroke",
                                       "strokeWidth": 1,
                                       "layout": "vertical",
                                       "padding": [
-                                        7,
+                                        0,
                                         14
                                       ],
+                                      "justifyContent": "center",
                                       "alignItems": "center",
                                       "children": [
                                         {
@@ -2842,7 +2850,7 @@
                                           "fill": "$text-primary",
                                           "content": "47 ms",
                                           "fontFamily": "$font",
-                                          "fontSize": 14,
+                                          "fontSize": 15,
                                           "fontWeight": "700"
                                         },
                                         {
@@ -2861,15 +2869,17 @@
                                       "type": "frame",
                                       "id": "mDBAH",
                                       "name": "Tile timeouts",
+                                      "height": 33,
                                       "fill": "$card",
                                       "cornerRadius": 9,
                                       "stroke": "$card-stroke",
                                       "strokeWidth": 1,
                                       "layout": "vertical",
                                       "padding": [
-                                        7,
+                                        0,
                                         14
                                       ],
+                                      "justifyContent": "center",
                                       "alignItems": "center",
                                       "children": [
                                         {
@@ -2879,7 +2889,7 @@
                                           "fill": "$text-primary",
                                           "content": "12",
                                           "fontFamily": "$font",
-                                          "fontSize": 14,
+                                          "fontSize": 15,
                                           "fontWeight": "700"
                                         },
                                         {
@@ -2898,15 +2908,17 @@
                                       "type": "frame",
                                       "id": "Sd9My",
                                       "name": "Tile pings",
+                                      "height": 33,
                                       "fill": "$card",
                                       "cornerRadius": 9,
                                       "stroke": "$card-stroke",
                                       "strokeWidth": 1,
                                       "layout": "vertical",
                                       "padding": [
-                                        7,
+                                        0,
                                         14
                                       ],
+                                      "justifyContent": "center",
                                       "alignItems": "center",
                                       "children": [
                                         {
@@ -2914,9 +2926,9 @@
                                           "id": "EwMHF",
                                           "name": "v",
                                           "fill": "$text-primary",
-                                          "content": "10,800",
+                                          "content": "3,600",
                                           "fontFamily": "$font",
-                                          "fontSize": 14,
+                                          "fontSize": 15,
                                           "fontWeight": "700"
                                         },
                                         {
@@ -2937,13 +2949,14 @@
                                   "type": "frame",
                                   "id": "y1mzC",
                                   "name": "Clear",
+                                  "height": 33,
                                   "fill": "$card",
                                   "cornerRadius": 9,
                                   "stroke": "$card-stroke",
                                   "strokeWidth": 1,
                                   "gap": 6,
                                   "padding": [
-                                    8,
+                                    0,
                                     12
                                   ],
                                   "alignItems": "center",
@@ -2965,7 +2978,7 @@
                                       "fill": "$text-secondary",
                                       "content": "Clear history",
                                       "fontFamily": "$font",
-                                      "fontSize": 13,
+                                      "fontSize": 12,
                                       "fontWeight": "600"
                                     }
                                   ]
@@ -2986,23 +2999,25 @@
                               "type": "frame",
                               "id": "W42nvu",
                               "name": "Chips",
+                              "height": 33,
                               "fill": "$card",
                               "cornerRadius": 9,
                               "stroke": "$card-stroke",
                               "strokeWidth": 1,
                               "gap": 2,
-                              "padding": 3,
+                              "padding": 2,
                               "alignItems": "center",
                               "children": [
                                 {
                                   "type": "frame",
                                   "id": "r4Wdo",
                                   "name": "Chip All",
+                                  "height": "fill_container",
                                   "fill": "$control",
                                   "cornerRadius": 6,
                                   "gap": 5,
                                   "padding": [
-                                    5,
+                                    0,
                                     8
                                   ],
                                   "alignItems": "center",
@@ -3023,10 +3038,11 @@
                                   "type": "frame",
                                   "id": "gJvKN",
                                   "name": "Chip Good",
+                                  "height": "fill_container",
                                   "cornerRadius": 6,
                                   "gap": 5,
                                   "padding": [
-                                    5,
+                                    0,
                                     8
                                   ],
                                   "alignItems": "center",
@@ -3046,7 +3062,8 @@
                                       "fill": "$text-secondary",
                                       "content": "Good",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -3054,10 +3071,11 @@
                                   "type": "frame",
                                   "id": "bLQSV",
                                   "name": "Chip Unstable",
+                                  "height": "fill_container",
                                   "cornerRadius": 6,
                                   "gap": 5,
                                   "padding": [
-                                    5,
+                                    0,
                                     8
                                   ],
                                   "alignItems": "center",
@@ -3077,7 +3095,8 @@
                                       "fill": "$text-secondary",
                                       "content": "Unstable",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -3085,10 +3104,11 @@
                                   "type": "frame",
                                   "id": "hDwxG",
                                   "name": "Chip Problem / Timeout",
+                                  "height": "fill_container",
                                   "cornerRadius": 6,
                                   "gap": 5,
                                   "padding": [
-                                    5,
+                                    0,
                                     8
                                   ],
                                   "alignItems": "center",
@@ -3108,7 +3128,8 @@
                                       "fill": "$text-secondary",
                                       "content": "Problem / Timeout",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 }
@@ -3118,13 +3139,14 @@
                               "type": "frame",
                               "id": "nHmPb",
                               "name": "Export",
+                              "height": 33,
                               "fill": "$card",
                               "cornerRadius": 9,
                               "stroke": "$card-stroke",
                               "strokeWidth": 1,
                               "gap": 6,
                               "padding": [
-                                8,
+                                0,
                                 12
                               ],
                               "alignItems": "center",
@@ -3144,9 +3166,9 @@
                                   "id": "aNIq8",
                                   "name": "l",
                                   "fill": "$text-primary",
-                                  "content": "Export (10,800)",
+                                  "content": "Export (3,600)",
                                   "fontFamily": "$font",
-                                  "fontSize": 13,
+                                  "fontSize": 12,
                                   "fontWeight": "600"
                                 }
                               ]
@@ -3294,7 +3316,8 @@
                                       "fill": "$text-primary",
                                       "content": "19:15:35",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -3313,7 +3336,8 @@
                                       "fill": "$text-primary",
                                       "content": "8.8.8.8",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -3333,7 +3357,8 @@
                                       "fill": "$text-primary",
                                       "content": "38",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -3361,7 +3386,8 @@
                                       "fill": "$text-secondary",
                                       "content": "Good",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 }
@@ -3397,7 +3423,8 @@
                                       "fill": "$text-primary",
                                       "content": "19:15:34",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -3416,7 +3443,8 @@
                                       "fill": "$text-primary",
                                       "content": "8.8.8.8",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -3436,7 +3464,8 @@
                                       "fill": "$text-primary",
                                       "content": "36",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -3464,7 +3493,8 @@
                                       "fill": "$text-secondary",
                                       "content": "Good",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 }
@@ -3500,7 +3530,8 @@
                                       "fill": "$text-primary",
                                       "content": "19:15:33",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -3519,7 +3550,8 @@
                                       "fill": "$text-primary",
                                       "content": "8.8.8.8",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -3539,7 +3571,8 @@
                                       "fill": "$text-primary",
                                       "content": "36",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -3567,7 +3600,8 @@
                                       "fill": "$text-secondary",
                                       "content": "Good",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 }
@@ -3603,7 +3637,8 @@
                                       "fill": "$text-primary",
                                       "content": "19:15:32",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -3622,7 +3657,8 @@
                                       "fill": "$text-primary",
                                       "content": "8.8.8.8",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -3642,7 +3678,8 @@
                                       "fill": "$text-primary",
                                       "content": "37",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -3670,7 +3707,8 @@
                                       "fill": "$text-secondary",
                                       "content": "Good",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 }
@@ -3706,7 +3744,8 @@
                                       "fill": "$text-primary",
                                       "content": "19:15:31",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -3725,7 +3764,8 @@
                                       "fill": "$text-primary",
                                       "content": "8.8.8.8",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -3745,7 +3785,8 @@
                                       "fill": "$text-primary",
                                       "content": "36",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -3773,7 +3814,8 @@
                                       "fill": "$text-secondary",
                                       "content": "Good",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 }
@@ -3809,7 +3851,8 @@
                                       "fill": "$text-primary",
                                       "content": "19:15:30",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -3828,7 +3871,8 @@
                                       "fill": "$text-primary",
                                       "content": "8.8.8.8",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -3848,7 +3892,8 @@
                                       "fill": "$text-primary",
                                       "content": "38",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -3876,7 +3921,8 @@
                                       "fill": "$text-secondary",
                                       "content": "Good",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 }
@@ -3912,7 +3958,8 @@
                                       "fill": "$text-primary",
                                       "content": "19:15:29",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -3931,7 +3978,8 @@
                                       "fill": "$text-primary",
                                       "content": "8.8.8.8",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -3951,7 +3999,8 @@
                                       "fill": "$text-primary",
                                       "content": "38",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -3979,7 +4028,8 @@
                                       "fill": "$text-secondary",
                                       "content": "Good",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 }
@@ -4015,7 +4065,8 @@
                                       "fill": "$text-primary",
                                       "content": "19:15:28",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -4034,7 +4085,8 @@
                                       "fill": "$text-primary",
                                       "content": "8.8.8.8",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -4054,7 +4106,8 @@
                                       "fill": "$text-primary",
                                       "content": "37",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -4082,7 +4135,8 @@
                                       "fill": "$text-secondary",
                                       "content": "Good",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 }
@@ -4118,7 +4172,8 @@
                                       "fill": "$text-primary",
                                       "content": "19:15:27",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -4137,7 +4192,8 @@
                                       "fill": "$text-primary",
                                       "content": "8.8.8.8",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -4157,7 +4213,8 @@
                                       "fill": "$text-primary",
                                       "content": "43",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -4185,7 +4242,8 @@
                                       "fill": "$text-secondary",
                                       "content": "Good",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 }
@@ -4221,7 +4279,8 @@
                                       "fill": "$text-primary",
                                       "content": "19:15:26",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -4240,7 +4299,8 @@
                                       "fill": "$text-primary",
                                       "content": "8.8.8.8",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -4260,7 +4320,8 @@
                                       "fill": "$text-primary",
                                       "content": "36",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -4288,7 +4349,8 @@
                                       "fill": "$text-secondary",
                                       "content": "Good",
                                       "fontFamily": "$font",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 }
@@ -4326,9 +4388,9 @@
                                   "id": "w38SEn",
                                   "name": "t",
                                   "fill": "$text-tertiary",
-                                  "content": "Pings older than 3 hours are removed as new ones arrive",
+                                  "content": "Pings older than 1 hour are removed as new ones arrive",
                                   "fontFamily": "$font",
-                                  "fontSize": 11,
+                                  "fontSize": 10,
                                   "fontWeight": "normal"
                                 }
                               ]
@@ -4340,7 +4402,7 @@
                               "fill": "$text-tertiary",
                               "content": "⌘C copies selected rows",
                               "fontFamily": "$font",
-                              "fontSize": 11,
+                              "fontSize": 10,
                               "fontWeight": "normal"
                             }
                           ]
@@ -4517,7 +4579,7 @@
                               "fill": "$text-tertiary",
                               "content": "IP address, hostname, or localhost",
                               "fontFamily": "$font",
-                              "fontSize": 11,
+                              "fontSize": 10,
                               "fontWeight": "normal"
                             },
                             {
@@ -4549,7 +4611,7 @@
                                       "type": "frame",
                                       "id": "zsLqW",
                                       "name": "Field",
-                                      "width": 64,
+                                      "width": 41,
                                       "fill": "$control",
                                       "cornerRadius": 6,
                                       "padding": [
@@ -4563,7 +4625,7 @@
                                           "id": "r7gRoM",
                                           "name": "v",
                                           "fill": "$text-primary",
-                                          "content": "1",
+                                          "content": "0.5",
                                           "fontFamily": "$font",
                                           "fontSize": 14,
                                           "fontWeight": "normal"
@@ -4572,13 +4634,33 @@
                                     },
                                     {
                                       "type": "text",
-                                      "id": "y95eRX",
-                                      "name": "u",
-                                      "fill": "$text-secondary",
-                                      "content": "s",
-                                      "fontFamily": "$font",
-                                      "fontSize": 13,
+                                      "id": "gmPbY",
+                                      "x": 0,
+                                      "y": 0,
+                                      "name": "gone",
+                                      "enabled": false,
+                                      "fill": "#00000000",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 1,
                                       "fontWeight": "normal"
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "CcfC1",
+                                      "name": "Unit",
+                                      "width": 17,
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "nQD5c",
+                                          "name": "u",
+                                          "fill": "$text-secondary",
+                                          "content": "s",
+                                          "fontFamily": "$font",
+                                          "fontSize": 13,
+                                          "fontWeight": "normal"
+                                        }
+                                      ]
                                     },
                                     {
                                       "type": "frame",
@@ -4625,8 +4707,336 @@
                               "fill": "$text-tertiary",
                               "content": "0.5 – 60 s, in steps of 0.5",
                               "fontFamily": "$font",
-                              "fontSize": 11,
+                              "fontSize": 10,
                               "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "C6MIQi",
+                          "name": "Section Status Thresholds",
+                          "fill": "$text-secondary",
+                          "content": "STATUS THRESHOLDS",
+                          "fontFamily": "$font",
+                          "fontSize": 11,
+                          "fontWeight": "700",
+                          "letterSpacing": 0.6
+                        },
+                        {
+                          "type": "frame",
+                          "id": "lo4wP",
+                          "name": "Card Status Thresholds",
+                          "width": "fill_container",
+                          "fill": "$card",
+                          "cornerRadius": 12,
+                          "stroke": "$card-stroke",
+                          "strokeWidth": 1,
+                          "layout": "vertical",
+                          "gap": 10,
+                          "padding": [
+                            14,
+                            16
+                          ],
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "I7sbi",
+                              "name": "Row Good",
+                              "width": "fill_container",
+                              "justifyContent": "space_between",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "JnTE3",
+                                  "name": "Left",
+                                  "gap": 12,
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "ellipse",
+                                      "id": "F2M7j",
+                                      "name": "swatch",
+                                      "fill": "$good",
+                                      "width": 20,
+                                      "height": 20,
+                                      "stroke": "#FFFFFF33",
+                                      "strokeWidth": 1
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "B1m9m",
+                                      "name": "label",
+                                      "fill": "$text-primary",
+                                      "content": "Good",
+                                      "fontFamily": "$font",
+                                      "fontSize": 14,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "vQEt4",
+                                  "name": "Stepper",
+                                  "gap": 8,
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "frame",
+                                      "id": "Q3geBN",
+                                      "name": "Field",
+                                      "width": 72,
+                                      "fill": "$control",
+                                      "cornerRadius": 6,
+                                      "padding": [
+                                        6,
+                                        10
+                                      ],
+                                      "justifyContent": "end",
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "qzNWc",
+                                          "name": "v",
+                                          "fill": "$text-primary",
+                                          "content": "55",
+                                          "fontFamily": "$font",
+                                          "fontSize": 14,
+                                          "fontWeight": "normal"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "MxfCy",
+                                      "name": "Unit",
+                                      "width": 20,
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "Zz1YH",
+                                          "name": "u",
+                                          "fill": "$text-secondary",
+                                          "content": "ms",
+                                          "fontFamily": "$font",
+                                          "fontSize": 13,
+                                          "fontWeight": "normal"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "Imjp0",
+                                      "name": "arrows",
+                                      "fill": "$control",
+                                      "cornerRadius": 6,
+                                      "layout": "vertical",
+                                      "padding": [
+                                        2,
+                                        3
+                                      ],
+                                      "children": [
+                                        {
+                                          "type": "icon",
+                                          "id": "FpnCJ",
+                                          "name": "up",
+                                          "width": 12,
+                                          "height": 12,
+                                          "icon": "chevron-up",
+                                          "library": "lucide",
+                                          "fill": "$text-primary"
+                                        },
+                                        {
+                                          "type": "icon",
+                                          "id": "i4mlgw",
+                                          "name": "down",
+                                          "width": 12,
+                                          "height": 12,
+                                          "icon": "chevron-down",
+                                          "library": "lucide",
+                                          "fill": "$text-primary"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "d4fUQk",
+                              "name": "Row Unstable",
+                              "width": "fill_container",
+                              "justifyContent": "space_between",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "XmXir",
+                                  "name": "Left",
+                                  "gap": 12,
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "ellipse",
+                                      "id": "zRYZD",
+                                      "name": "swatch",
+                                      "fill": "$unstable",
+                                      "width": 20,
+                                      "height": 20,
+                                      "stroke": "#FFFFFF33",
+                                      "strokeWidth": 1
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "OQXfF",
+                                      "name": "label",
+                                      "fill": "$text-primary",
+                                      "content": "Unstable",
+                                      "fontFamily": "$font",
+                                      "fontSize": 14,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "XDf85",
+                                  "name": "Stepper",
+                                  "gap": 8,
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "frame",
+                                      "id": "DWqa9",
+                                      "name": "Field",
+                                      "width": 72,
+                                      "fill": "$control",
+                                      "cornerRadius": 6,
+                                      "padding": [
+                                        6,
+                                        10
+                                      ],
+                                      "justifyContent": "end",
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "Al7ad",
+                                          "name": "v",
+                                          "fill": "$text-primary",
+                                          "content": "250",
+                                          "fontFamily": "$font",
+                                          "fontSize": 14,
+                                          "fontWeight": "normal"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "dY2B0",
+                                      "name": "Unit",
+                                      "width": 20,
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "H4HWhx",
+                                          "name": "u",
+                                          "fill": "$text-secondary",
+                                          "content": "ms",
+                                          "fontFamily": "$font",
+                                          "fontSize": 13,
+                                          "fontWeight": "normal"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "Rnsae",
+                                      "name": "arrows",
+                                      "fill": "$control",
+                                      "cornerRadius": 6,
+                                      "layout": "vertical",
+                                      "padding": [
+                                        2,
+                                        3
+                                      ],
+                                      "children": [
+                                        {
+                                          "type": "icon",
+                                          "id": "Q5UICS",
+                                          "name": "up",
+                                          "width": 12,
+                                          "height": 12,
+                                          "icon": "chevron-up",
+                                          "library": "lucide",
+                                          "fill": "$text-primary"
+                                        },
+                                        {
+                                          "type": "icon",
+                                          "id": "q6zC9i",
+                                          "name": "down",
+                                          "width": 12,
+                                          "height": 12,
+                                          "icon": "chevron-down",
+                                          "library": "lucide",
+                                          "fill": "$text-primary"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "UlxEM",
+                              "name": "Row Problem",
+                              "width": "fill_container",
+                              "justifyContent": "space_between",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "N8Dnq",
+                                  "name": "Left",
+                                  "gap": 12,
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "ellipse",
+                                      "id": "f4BCHr",
+                                      "name": "swatch",
+                                      "fill": "$problem",
+                                      "width": 20,
+                                      "height": 20,
+                                      "stroke": "#FFFFFF33",
+                                      "strokeWidth": 1
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "CDDTk",
+                                      "name": "label",
+                                      "fill": "$text-primary",
+                                      "content": "Problem",
+                                      "fontFamily": "$font",
+                                      "fontSize": 14,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "e664B",
+                                  "name": "hint",
+                                  "fill": "$text-tertiary",
+                                  "content": "slower or no reply",
+                                  "fontFamily": "$font",
+                                  "fontSize": 10,
+                                  "fontWeight": "normal"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -4679,9 +5089,10 @@
                                   "type": "frame",
                                   "id": "i0csJ7",
                                   "name": "Picker",
-                                  "width": 130,
+                                  "width": 126,
                                   "fill": "$control",
                                   "cornerRadius": 6,
+                                  "gap": 14,
                                   "padding": [
                                     6,
                                     10
@@ -4694,7 +5105,7 @@
                                       "id": "UggAm",
                                       "name": "v",
                                       "fill": "$text-primary",
-                                      "content": "3 hours",
+                                      "content": "30 minutes",
                                       "fontFamily": "$font",
                                       "fontSize": 14,
                                       "fontWeight": "normal"
@@ -4743,9 +5154,9 @@
                                       "id": "sZtw7",
                                       "name": "hint",
                                       "fill": "$text-tertiary",
-                                      "content": "≈ 10,800 pings · about 0.7 MB",
+                                      "content": "≈ 3,600 pings · about 197 kB",
                                       "fontFamily": "$font",
-                                      "fontSize": 11,
+                                      "fontSize": 10,
                                       "fontWeight": "normal"
                                     }
                                   ]
@@ -4774,7 +5185,7 @@
                                       "fill": "$text-tertiary",
                                       "content": "Kept in memory only — cleared when PingMate quits",
                                       "fontFamily": "$font",
-                                      "fontSize": 11,
+                                      "fontSize": 10,
                                       "fontWeight": "normal"
                                     }
                                   ]
@@ -5062,7 +5473,7 @@
                               "fill": "$text-tertiary",
                               "content": "IP address, hostname, or localhost",
                               "fontFamily": "$font",
-                              "fontSize": 11,
+                              "fontSize": 10,
                               "fontWeight": "normal"
                             },
                             {
@@ -5094,7 +5505,7 @@
                                       "type": "frame",
                                       "id": "pyKrq",
                                       "name": "Field",
-                                      "width": 64,
+                                      "width": 72,
                                       "fill": "$control",
                                       "cornerRadius": 6,
                                       "padding": [
@@ -5116,13 +5527,33 @@
                                       ]
                                     },
                                     {
+                                      "type": "frame",
+                                      "id": "uZ0Rt",
+                                      "name": "Unit",
+                                      "width": 20,
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "o4SZa",
+                                          "name": "u",
+                                          "fill": "$text-secondary",
+                                          "content": "s",
+                                          "fontFamily": "$font",
+                                          "fontSize": 13,
+                                          "fontWeight": "normal"
+                                        }
+                                      ]
+                                    },
+                                    {
                                       "type": "text",
-                                      "id": "vJknF",
-                                      "name": "u",
-                                      "fill": "$text-secondary",
-                                      "content": "s",
-                                      "fontFamily": "$font",
-                                      "fontSize": 13,
+                                      "id": "cEG2O",
+                                      "x": 0,
+                                      "y": 0,
+                                      "name": "gone",
+                                      "enabled": false,
+                                      "fill": "#00000000",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 1,
                                       "fontWeight": "normal"
                                     },
                                     {
@@ -5170,8 +5601,336 @@
                               "fill": "$text-tertiary",
                               "content": "0.5 – 60 s, in steps of 0.5",
                               "fontFamily": "$font",
-                              "fontSize": 11,
+                              "fontSize": 10,
                               "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "cXrFn",
+                          "name": "Section Status Thresholds",
+                          "fill": "$text-secondary",
+                          "content": "STATUS THRESHOLDS",
+                          "fontFamily": "$font",
+                          "fontSize": 11,
+                          "fontWeight": "700",
+                          "letterSpacing": 0.6
+                        },
+                        {
+                          "type": "frame",
+                          "id": "v8y2GB",
+                          "name": "Card Status Thresholds",
+                          "width": "fill_container",
+                          "fill": "$card",
+                          "cornerRadius": 12,
+                          "stroke": "$card-stroke",
+                          "strokeWidth": 1,
+                          "layout": "vertical",
+                          "gap": 10,
+                          "padding": [
+                            14,
+                            16
+                          ],
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "tOmTi",
+                              "name": "Row Good",
+                              "width": "fill_container",
+                              "justifyContent": "space_between",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "aGYGd",
+                                  "name": "Left",
+                                  "gap": 12,
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "ellipse",
+                                      "id": "J1fYkT",
+                                      "name": "swatch",
+                                      "fill": "$good",
+                                      "width": 20,
+                                      "height": 20,
+                                      "stroke": "#FFFFFF33",
+                                      "strokeWidth": 1
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "JwsjN",
+                                      "name": "label",
+                                      "fill": "$text-primary",
+                                      "content": "Good",
+                                      "fontFamily": "$font",
+                                      "fontSize": 14,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "JBgyP",
+                                  "name": "Stepper",
+                                  "gap": 8,
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "frame",
+                                      "id": "g0ROX",
+                                      "name": "Field",
+                                      "width": 72,
+                                      "fill": "$control",
+                                      "cornerRadius": 6,
+                                      "padding": [
+                                        6,
+                                        10
+                                      ],
+                                      "justifyContent": "end",
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "aLBg6",
+                                          "name": "v",
+                                          "fill": "$text-primary",
+                                          "content": "55",
+                                          "fontFamily": "$font",
+                                          "fontSize": 14,
+                                          "fontWeight": "normal"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "lexW1",
+                                      "name": "Unit",
+                                      "width": 20,
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "jukDo",
+                                          "name": "u",
+                                          "fill": "$text-secondary",
+                                          "content": "ms",
+                                          "fontFamily": "$font",
+                                          "fontSize": 13,
+                                          "fontWeight": "normal"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "La9fY",
+                                      "name": "arrows",
+                                      "fill": "$control",
+                                      "cornerRadius": 6,
+                                      "layout": "vertical",
+                                      "padding": [
+                                        2,
+                                        3
+                                      ],
+                                      "children": [
+                                        {
+                                          "type": "icon",
+                                          "id": "V3U4Xr",
+                                          "name": "up",
+                                          "width": 12,
+                                          "height": 12,
+                                          "icon": "chevron-up",
+                                          "library": "lucide",
+                                          "fill": "$text-primary"
+                                        },
+                                        {
+                                          "type": "icon",
+                                          "id": "fcDqa",
+                                          "name": "down",
+                                          "width": 12,
+                                          "height": 12,
+                                          "icon": "chevron-down",
+                                          "library": "lucide",
+                                          "fill": "$text-primary"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "nlXLF",
+                              "name": "Row Unstable",
+                              "width": "fill_container",
+                              "justifyContent": "space_between",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "LmXKo",
+                                  "name": "Left",
+                                  "gap": 12,
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "ellipse",
+                                      "id": "QCXlA",
+                                      "name": "swatch",
+                                      "fill": "$unstable",
+                                      "width": 20,
+                                      "height": 20,
+                                      "stroke": "#FFFFFF33",
+                                      "strokeWidth": 1
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "BtTOK",
+                                      "name": "label",
+                                      "fill": "$text-primary",
+                                      "content": "Unstable",
+                                      "fontFamily": "$font",
+                                      "fontSize": 14,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "QfZzm",
+                                  "name": "Stepper",
+                                  "gap": 8,
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "frame",
+                                      "id": "ZUMB3",
+                                      "name": "Field",
+                                      "width": 72,
+                                      "fill": "$control",
+                                      "cornerRadius": 6,
+                                      "padding": [
+                                        6,
+                                        10
+                                      ],
+                                      "justifyContent": "end",
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "vlxJk",
+                                          "name": "v",
+                                          "fill": "$text-primary",
+                                          "content": "250",
+                                          "fontFamily": "$font",
+                                          "fontSize": 14,
+                                          "fontWeight": "normal"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "IyYyb",
+                                      "name": "Unit",
+                                      "width": 20,
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "EKWMx",
+                                          "name": "u",
+                                          "fill": "$text-secondary",
+                                          "content": "ms",
+                                          "fontFamily": "$font",
+                                          "fontSize": 13,
+                                          "fontWeight": "normal"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "xqjVa",
+                                      "name": "arrows",
+                                      "fill": "$control",
+                                      "cornerRadius": 6,
+                                      "layout": "vertical",
+                                      "padding": [
+                                        2,
+                                        3
+                                      ],
+                                      "children": [
+                                        {
+                                          "type": "icon",
+                                          "id": "hi59P",
+                                          "name": "up",
+                                          "width": 12,
+                                          "height": 12,
+                                          "icon": "chevron-up",
+                                          "library": "lucide",
+                                          "fill": "$text-primary"
+                                        },
+                                        {
+                                          "type": "icon",
+                                          "id": "AUvTU",
+                                          "name": "down",
+                                          "width": 12,
+                                          "height": 12,
+                                          "icon": "chevron-down",
+                                          "library": "lucide",
+                                          "fill": "$text-primary"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "ktBsf",
+                              "name": "Row Problem",
+                              "width": "fill_container",
+                              "justifyContent": "space_between",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "CHy4k",
+                                  "name": "Left",
+                                  "gap": 12,
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "ellipse",
+                                      "id": "cHR5D",
+                                      "name": "swatch",
+                                      "fill": "$problem",
+                                      "width": 20,
+                                      "height": 20,
+                                      "stroke": "#FFFFFF33",
+                                      "strokeWidth": 1
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "Id9DN",
+                                      "name": "label",
+                                      "fill": "$text-primary",
+                                      "content": "Problem",
+                                      "fontFamily": "$font",
+                                      "fontSize": 14,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "xQfhQ",
+                                  "name": "hint",
+                                  "fill": "$text-tertiary",
+                                  "content": "slower or no reply",
+                                  "fontFamily": "$font",
+                                  "fontSize": 10,
+                                  "fontWeight": "normal"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -5224,11 +5983,11 @@
                                   "type": "frame",
                                   "id": "fDYnQ",
                                   "name": "Picker",
-                                  "width": 130,
                                   "fill": "$control",
                                   "cornerRadius": 6,
                                   "stroke": "$accent",
                                   "strokeWidth": 2,
+                                  "gap": 14,
                                   "padding": [
                                     6,
                                     10
@@ -5290,9 +6049,9 @@
                                       "id": "AortW",
                                       "name": "hint",
                                       "fill": "$text-tertiary",
-                                      "content": "≈ 86,400 pings · about 5.5 MB",
+                                      "content": "≈ 86,400 pings · about 4.8 MB",
                                       "fontFamily": "$font",
-                                      "fontSize": 11,
+                                      "fontSize": 10,
                                       "fontWeight": "normal"
                                     }
                                   ]
@@ -5321,7 +6080,7 @@
                                       "fill": "$text-tertiary",
                                       "content": "Kept in memory only — cleared when PingMate quits",
                                       "fontFamily": "$font",
-                                      "fontSize": 11,
+                                      "fontSize": 10,
                                       "fontWeight": "normal"
                                     }
                                   ]
@@ -5443,10 +6202,10 @@
                       "type": "frame",
                       "id": "j9Twm",
                       "layoutPosition": "absolute",
-                      "x": 142,
-                      "y": 69,
+                      "x": 162,
+                      "y": 226,
                       "name": "Menu",
-                      "width": 236,
+                      "width": 230,
                       "fill": "#2E2E2EFA",
                       "cornerRadius": 10,
                       "stroke": "#4A4A4A",
@@ -5470,7 +6229,7 @@
                           "name": "Item 15 minutes",
                           "width": "fill_container",
                           "cornerRadius": 5,
-                          "gap": 6,
+                          "gap": 8,
                           "padding": [
                             5,
                             8
@@ -5486,11 +6245,9 @@
                             },
                             {
                               "type": "text",
-                              "id": "Iok7A",
+                              "id": "pDs0B",
                               "name": "l",
                               "fill": "$text-primary",
-                              "textGrowth": "fixed-width",
-                              "width": "fill_container",
                               "content": "15 minutes",
                               "fontFamily": "$font",
                               "fontSize": 13,
@@ -5501,7 +6258,7 @@
                               "id": "Q5cGfN",
                               "name": "c",
                               "fill": "$text-tertiary",
-                              "content": "1,800",
+                              "content": "1,800 pings",
                               "fontFamily": "$font",
                               "fontSize": 11,
                               "fontWeight": "normal"
@@ -5514,7 +6271,7 @@
                           "name": "Item 30 minutes",
                           "width": "fill_container",
                           "cornerRadius": 5,
-                          "gap": 6,
+                          "gap": 8,
                           "padding": [
                             5,
                             8
@@ -5530,11 +6287,9 @@
                             },
                             {
                               "type": "text",
-                              "id": "HluAg",
+                              "id": "esKsp",
                               "name": "l",
                               "fill": "$text-primary",
-                              "textGrowth": "fixed-width",
-                              "width": "fill_container",
                               "content": "30 minutes",
                               "fontFamily": "$font",
                               "fontSize": 13,
@@ -5545,7 +6300,7 @@
                               "id": "i7JP4",
                               "name": "c",
                               "fill": "$text-tertiary",
-                              "content": "3,600",
+                              "content": "3,600 pings",
                               "fontFamily": "$font",
                               "fontSize": 11,
                               "fontWeight": "normal"
@@ -5558,7 +6313,7 @@
                           "name": "Item 1 hour",
                           "width": "fill_container",
                           "cornerRadius": 5,
-                          "gap": 6,
+                          "gap": 8,
                           "padding": [
                             5,
                             8
@@ -5574,11 +6329,9 @@
                             },
                             {
                               "type": "text",
-                              "id": "vZmcs",
+                              "id": "JPxxF",
                               "name": "l",
                               "fill": "$text-primary",
-                              "textGrowth": "fixed-width",
-                              "width": "fill_container",
                               "content": "1 hour",
                               "fontFamily": "$font",
                               "fontSize": 13,
@@ -5589,7 +6342,7 @@
                               "id": "o9ly6",
                               "name": "c",
                               "fill": "$text-tertiary",
-                              "content": "7,200",
+                              "content": "7,200 pings",
                               "fontFamily": "$font",
                               "fontSize": 11,
                               "fontWeight": "normal"
@@ -5602,7 +6355,7 @@
                           "name": "Item 2 hours",
                           "width": "fill_container",
                           "cornerRadius": 5,
-                          "gap": 6,
+                          "gap": 8,
                           "padding": [
                             5,
                             8
@@ -5618,11 +6371,9 @@
                             },
                             {
                               "type": "text",
-                              "id": "kemCP",
+                              "id": "nncrK",
                               "name": "l",
                               "fill": "$text-primary",
-                              "textGrowth": "fixed-width",
-                              "width": "fill_container",
                               "content": "2 hours",
                               "fontFamily": "$font",
                               "fontSize": 13,
@@ -5633,7 +6384,7 @@
                               "id": "dL72l",
                               "name": "c",
                               "fill": "$text-tertiary",
-                              "content": "14,400",
+                              "content": "14,400 pings",
                               "fontFamily": "$font",
                               "fontSize": 11,
                               "fontWeight": "normal"
@@ -5646,7 +6397,7 @@
                           "name": "Item 4 hours",
                           "width": "fill_container",
                           "cornerRadius": 5,
-                          "gap": 6,
+                          "gap": 8,
                           "padding": [
                             5,
                             8
@@ -5662,11 +6413,9 @@
                             },
                             {
                               "type": "text",
-                              "id": "g5PD3L",
+                              "id": "GUTeo",
                               "name": "l",
                               "fill": "$text-primary",
-                              "textGrowth": "fixed-width",
-                              "width": "fill_container",
                               "content": "4 hours",
                               "fontFamily": "$font",
                               "fontSize": 13,
@@ -5677,7 +6426,7 @@
                               "id": "LdHLl",
                               "name": "c",
                               "fill": "$text-tertiary",
-                              "content": "28,800",
+                              "content": "28,800 pings",
                               "fontFamily": "$font",
                               "fontSize": 11,
                               "fontWeight": "normal"
@@ -5690,7 +6439,7 @@
                           "name": "Item 6 hours",
                           "width": "fill_container",
                           "cornerRadius": 5,
-                          "gap": 6,
+                          "gap": 8,
                           "padding": [
                             5,
                             8
@@ -5706,11 +6455,9 @@
                             },
                             {
                               "type": "text",
-                              "id": "x7kH0",
+                              "id": "tUOIQ",
                               "name": "l",
                               "fill": "$text-primary",
-                              "textGrowth": "fixed-width",
-                              "width": "fill_container",
                               "content": "6 hours",
                               "fontFamily": "$font",
                               "fontSize": 13,
@@ -5721,7 +6468,7 @@
                               "id": "oiiXc",
                               "name": "c",
                               "fill": "$text-tertiary",
-                              "content": "43,200",
+                              "content": "43,200 pings",
                               "fontFamily": "$font",
                               "fontSize": 11,
                               "fontWeight": "normal"
@@ -5734,7 +6481,7 @@
                           "name": "Item 8 hours",
                           "width": "fill_container",
                           "cornerRadius": 5,
-                          "gap": 6,
+                          "gap": 8,
                           "padding": [
                             5,
                             8
@@ -5750,11 +6497,9 @@
                             },
                             {
                               "type": "text",
-                              "id": "VzSfq",
+                              "id": "y10yI",
                               "name": "l",
                               "fill": "$text-primary",
-                              "textGrowth": "fixed-width",
-                              "width": "fill_container",
                               "content": "8 hours",
                               "fontFamily": "$font",
                               "fontSize": 13,
@@ -5765,7 +6510,7 @@
                               "id": "WCQ5d",
                               "name": "c",
                               "fill": "$text-tertiary",
-                              "content": "57,600",
+                              "content": "57,600 pings",
                               "fontFamily": "$font",
                               "fontSize": 11,
                               "fontWeight": "normal"
@@ -5779,7 +6524,7 @@
                           "width": "fill_container",
                           "fill": "$accent",
                           "cornerRadius": 5,
-                          "gap": 6,
+                          "gap": 8,
                           "padding": [
                             5,
                             8
@@ -5807,11 +6552,9 @@
                             },
                             {
                               "type": "text",
-                              "id": "acRy7",
+                              "id": "X3t86",
                               "name": "l",
                               "fill": "$text-primary",
-                              "textGrowth": "fixed-width",
-                              "width": "fill_container",
                               "content": "12 hours",
                               "fontFamily": "$font",
                               "fontSize": 13,
@@ -5822,7 +6565,7 @@
                               "id": "bEffK",
                               "name": "c",
                               "fill": "#FFFFFFCC",
-                              "content": "86,400",
+                              "content": "86,400 pings",
                               "fontFamily": "$font",
                               "fontSize": 11,
                               "fontWeight": "normal"
@@ -5835,7 +6578,7 @@
                           "name": "Item 24 hours",
                           "width": "fill_container",
                           "cornerRadius": 5,
-                          "gap": 6,
+                          "gap": 8,
                           "padding": [
                             5,
                             8
@@ -5851,11 +6594,9 @@
                             },
                             {
                               "type": "text",
-                              "id": "w2tcI",
+                              "id": "ZFje9",
                               "name": "l",
                               "fill": "$text-tertiary",
-                              "textGrowth": "fixed-width",
-                              "width": "fill_container",
                               "content": "24 hours",
                               "fontFamily": "$font",
                               "fontSize": 13,
@@ -5866,37 +6607,7 @@
                               "id": "D6sS1Z",
                               "name": "c",
                               "fill": "$text-tertiary",
-                              "content": "over 100,000",
-                              "fontFamily": "$font",
-                              "fontSize": 11,
-                              "fontWeight": "normal"
-                            }
-                          ]
-                        },
-                        {
-                          "type": "frame",
-                          "id": "UpD6Z",
-                          "name": "Disabled reason",
-                          "width": "fill_container",
-                          "stroke": "#4A4A4A",
-                          "strokeWidth": {
-                            "top": 1
-                          },
-                          "padding": [
-                            6,
-                            8,
-                            4,
-                            26
-                          ],
-                          "children": [
-                            {
-                              "type": "text",
-                              "id": "BwXOL",
-                              "name": "t",
-                              "fill": "$text-tertiary",
-                              "textGrowth": "fixed-width",
-                              "width": "fill_container",
-                              "content": "24 hours needs an interval of 1 s or longer",
+                              "content": "needs 1s interval",
                               "fontFamily": "$font",
                               "fontSize": 11,
                               "fontWeight": "normal"

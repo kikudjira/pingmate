@@ -72,7 +72,7 @@ struct NumberField: View {
     let range: ClosedRange<Int>
     let suffix: String
     var step: Int = 1
-    var width: CGFloat = 72
+    var width: CGFloat = Tokens.Size.numberField
     var onCommit: () -> Void = {}
 
     @State private var text: String = ""
@@ -94,10 +94,12 @@ struct NumberField: View {
                 .font(.callout)
                 .foregroundStyle(.secondary)
                 .fixedSize()  // never let a narrow window break "ms" across two lines
+                .frame(width: Tokens.Size.unitColumn, alignment: .leading)
 
             Stepper("", value: Binding(get: { value }, set: { apply($0) }), in: range, step: step)
                 .labelsHidden()
         }
+        .frame(width: Tokens.Size.valueColumn, alignment: .trailing)
         .onAppear { text = String(value) }
         .onChange(of: value) { _, newValue in
             if !isFocused { text = String(newValue) }
@@ -156,7 +158,7 @@ struct SecondsField: View {
                 .textFieldStyle(.roundedBorder)
                 .multilineTextAlignment(.trailing)
                 .font(.body.monospacedDigit())
-                .frame(width: 62)
+                .frame(width: Tokens.Size.intervalField)
                 .focused($isFocused)
                 .onSubmit { commit() }
                 .onChange(of: text) { _, _ in scheduleCommit() }
@@ -164,11 +166,12 @@ struct SecondsField: View {
             Text("s")
                 .font(.callout)
                 .foregroundStyle(.secondary)
-                .fixedSize()
+                .frame(width: Tokens.Size.unitColumn, alignment: .leading)
 
             Stepper("", value: Binding(get: { seconds }, set: { apply($0) }), in: range, step: step)
                 .labelsHidden()
         }
+        .frame(width: Tokens.Size.valueColumn, alignment: .trailing)
         .onAppear { text = Self.format(seconds) }
         .onChange(of: milliseconds) { _, _ in
             if !isFocused { text = Self.format(seconds) }

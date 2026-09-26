@@ -142,7 +142,7 @@ struct SettingsTabView: View {
                 ColorSwatch(hex: $editedSettings.iconColors.problem, onChange: autoSave)
                 Text("Problem")
                 Spacer()
-                Text("anything slower, or no reply")
+                Text("slower or no reply")
                     .font(.caption2)
                     .foregroundStyle(.tertiary)
             }
@@ -172,40 +172,44 @@ struct SettingsTabView: View {
     private var historySection: some View {
         SettingsSection(title: "History") {
             SettingRow(title: "Keep history for") {
-                // A menu around an inline picker rather than a plain picker: a plain one puts
-                // the item's subtitle into the closed button as well. This way the button
-                // shows only the period, and the open menu shows the cost of each period
-                // and why an unavailable one is unavailable.
+                // A hand-built button around the menu: the native pop-up drew its own bezel a
+                // step lighter than the text fields, and borderless it centred the title with
+                // the chevrons glued to it. This one matches the fields and the design — title
+                // on the left, chevrons on the right edge.
                 Menu {
-                    Picker("", selection: $editedSettings.historyRetention) {
+                    Picker(selection: $editedSettings.historyRetention) {
                         ForEach(HistoryRetention.allCases) { retention in
                             let fits = retention.fits(interval: editedSettings.pingInterval)
-                            VStack {
-                                Text(retention.localizedName)
-                                Text(fits
-                                    ? "\(retention.entries(atInterval: editedSettings.pingInterval).formatted()) pings"
-                                    : "Needs an interval of \(StatusHeadline.intervalText(retention.minimumInterval)) or longer")
-                            }
-                            .tag(retention)
-                            .disabled(!fits)
+                            (Text(retention.localizedName)
+                                + Text(fits
+                                    ? "  \(retention.entries(atInterval: editedSettings.pingInterval).formatted()) pings"
+                                    : "  needs \(StatusHeadline.intervalText(retention.minimumInterval)) interval")
+                                .foregroundStyle(.secondary))
+                                .tag(retention)
+                                .selectionDisabled(!fits)
                         }
+                    } label: {
+                        EmptyView()
                     }
                     .pickerStyle(.inline)
                     .labelsHidden()
                 } label: {
-                    Text(editedSettings.historyRetention.localizedName)
+                    HStack(spacing: Tokens.Space.x1) {
+                        Text(editedSettings.historyRetention.localizedName)
+                        Spacer(minLength: 0)
+                        Image(systemName: "chevron.up.chevron.down")
+                            .font(.system(size: 10, weight: .semibold))
+                            .foregroundStyle(.secondary)
+                    }
+                    .padding(.horizontal, Tokens.Space.x2)
+                    .frame(width: Tokens.Size.valueColumn, height: 26)
+                    .background(Tokens.Size.controlFill, in: .rect(cornerRadius: Tokens.Radius.small))
+                    .contentShape(.rect)
                 }
-                // A menu draws a pull-down chevron; the up-down pair is what a pop-up picker —
-                // and the design — shows for choosing one value from a list.
+                .menuStyle(.button)
+                .buttonStyle(.plain)
                 .menuIndicator(.hidden)
-                .overlay(alignment: .trailing) {
-                    Image(systemName: "chevron.up.chevron.down")
-                        .font(.system(size: 9, weight: .semibold))
-                        .foregroundStyle(.secondary)
-                        .padding(.trailing, Tokens.Space.x2)
-                        .allowsHitTesting(false)
-                }
-                .frame(width: 130)
+                .fixedSize()
                 .onChange(of: editedSettings.historyRetention) { _, _ in autoSave() }
             }
 

@@ -29,6 +29,20 @@ enum Tokens {
         static let monitorWindow = CGSize(width: 560, height: 640)
         static let monitorWindowMin = CGSize(width: 480, height: 420)
         static let settingsWindowWidth: CGFloat = 400
+        /// Threshold fields share one width, and every number field one unit column, so "s"
+        /// and "ms" do not shift the fields against each other.
+        static let numberField: CGFloat = 72
+        static let unitColumn: CGFloat = 20
+        /// The value column on the right of Settings: field, unit and stepper together, and
+        /// the retention pop-up at the same width, so every value control shares both edges.
+        static let valueColumn: CGFloat = 126
+        /// The interval only ever holds "0.5" to "60", so its field is sized to that and not
+        /// to the threshold fields.
+        static let intervalField: CGFloat = 44
+        /// Fill that lifts a control off a glass card by the same step the system text
+        /// fields use (#4A494E card → #59585B field, measured). Behind the hand-built
+        /// retention button; the native pop-up's bezel came out a step lighter than the fields.
+        static let controlFill = Color.white.opacity(0.08)
         /// Minimum equals the height the whole form needs, so the settings window cannot be
         /// shrunk into a scrolling state. The `ScrollView` behind it only earns its keep on a
         /// display too short for the form, or when inline errors push it over.
