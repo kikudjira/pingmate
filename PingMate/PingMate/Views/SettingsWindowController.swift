@@ -51,6 +51,11 @@ class SettingsWindowController: NSObject {
         window.titlebarAppearsTransparent = true
         window.center()
         window.setFrameAutosaveName("SettingsWindow")
+        // The autosave restores position and size; keep the position but open at the form's
+        // height, so a size saved by an older, taller layout does not leave a gap under it.
+        let top = window.frame.maxY
+        window.setContentSize(NSSize(width: window.contentLayoutRect.width, height: height))
+        window.setFrameTopLeftPoint(NSPoint(x: window.frame.minX, y: top))
         window.isReleasedWhenClosed = false
 
         self.window = window

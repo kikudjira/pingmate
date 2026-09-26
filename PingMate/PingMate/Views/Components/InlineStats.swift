@@ -17,6 +17,8 @@ struct InlineStats: View {
     let pings: Int
     var density: Density = .filling
 
+    @Environment(\.surfaceStyle) private var surfaceStyle
+
     var body: some View {
         GlassEffectContainer(spacing: Tokens.Space.x2) {
             HStack(spacing: Tokens.Space.x2) {
@@ -44,7 +46,7 @@ struct InlineStats: View {
         // height; the popover has them on a row of their own and gives them room.
         .padding(.vertical, density == .filling ? Tokens.Space.x2 : 0)
         .padding(.horizontal, density == .filling ? Tokens.Space.x2 : Tokens.Space.x4)
-        .frame(height: density == .filling ? nil : Tokens.controlHeight)
+        .frame(height: density == .filling ? nil : (surfaceStyle == .system ? Tokens.systemControlHeight : Tokens.controlHeight))
         .frame(maxWidth: density == .filling ? .infinity : nil)
         .glassCard(cornerRadius: Tokens.Radius.small)
         .accessibilityElement(children: .combine)
