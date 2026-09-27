@@ -85,6 +85,19 @@ enum Tokens {
     /// button and segmented control on macOS 26 (measured 36pt).
     static let systemControlHeight: CGFloat = 36
 
+    /// Fills of the system-styled windows, History and Settings. Every surface there takes one
+    /// of these, so a card, a tile and a ring cannot drift into shades of their own.
+    enum Fill {
+        /// Behind a group of content: the History header card and list. System Settings puts a
+        /// shade like this behind a group — darker than a white window, lighter than #1E1E1E.
+        static let group = Color(nsColor: .quaternarySystemFill)
+        /// Behind a control-sized element — the stat tiles, the monitoring toggle — so it
+        /// reads as the same weight as the bordered buttons beside it, one step above `group`.
+        static let control = Color(nsColor: .tertiarySystemFill)
+        /// Outline for a control drawn on a surface of the same tone.
+        static let stroke = Color.primary.opacity(0.22)
+    }
+
     /// How long a recovery ring stays on the menubar icon.
     static let statusTransitionDuration: TimeInterval = 5
 }
@@ -121,19 +134,31 @@ extension EnvironmentValues {
     }
 }
 
+/// Which system fill a surface takes in the system-styled windows.
+enum SurfaceRole {
+    case group
+    case control
+
+    var fill: Color {
+        switch self {
+        case .group: Tokens.Fill.group
+        case .control: Tokens.Fill.control
+        }
+    }
+}
+
 struct GlassSurface: ViewModifier {
     let cornerRadius: CGFloat
     let interactive: Bool
     var tint: Color?
+    var role: SurfaceRole = .group
 
     @Environment(\.glassEnabled) private var glassEnabled
     @Environment(\.surfaceStyle) private var surfaceStyle
 
     func body(content: Content) -> some View {
         if surfaceStyle == .system {
-            // The fill System Settings puts behind a group: a shade darker than the white
-            // window in light mode, a shade lighter than #1E1E1E in dark.
-            content.background(Color(nsColor: .quaternarySystemFill), in: .rect(cornerRadius: cornerRadius))
+            content.background(role.fill, in: .rect(cornerRadius: cornerRadius))
         } else if glassEnabled {
             content.glassEffect(glass, in: .rect(cornerRadius: cornerRadius))
         } else {
@@ -150,12 +175,17 @@ struct GlassSurface: ViewModifier {
 
 extension View {
     /// Glass surface used for every card, tile and button in the app.
-    func glassCard(cornerRadius: CGFloat = Tokens.Radius.medium, interactive: Bool = false) -> some View {
-        modifier(GlassSurface(cornerRadius: cornerRadius, interactive: interactive))
+    /// `role` only matters in the system-styled windows; the popover draws glass either way.
+    func glassCard(
+        cornerRadius: CGFloat = Tokens.Radius.medium,
+        interactive: Bool = false,
+        role: SurfaceRole = .group
+    ) -> some View {
+        modifier(GlassSurface(cornerRadius: cornerRadius, interactive: interactive, role: role))
     }
 
     /// Circular glass surface with a tint, for the icon-only monitoring toggle.
     func glassCircle(diameter: CGFloat, tint: Color) -> some View {
-        modifier(GlassSurface(cornerRadius: diameter / 2, interactive: true, tint: tint))
+        modifier(GlassSurface(cornerRadius: diameter / 2, interactive: true, tint: tint, role: .control))
     }
 }

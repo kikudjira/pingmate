@@ -88,7 +88,12 @@ struct MonitorWindowView: View {
                     density: .hugging
                 )
                 Spacer(minLength: Tokens.Space.x3)
-                GlassButton(title: "Clear history", systemImage: "trash", muted: true) {
+                GlassButton(
+                    title: Self.clear.title,
+                    systemImage: Self.clear.systemImage,
+                    muted: true,
+                    sharesWidthWith: [Self.export]
+                ) {
                     showClearConfirmation = true
                 }
                 .disabled(pingService.history.isEmpty)
@@ -105,7 +110,12 @@ struct MonitorWindowView: View {
         HStack(spacing: Tokens.Space.x2) {
             StatusFilterChips(selection: $statusFilter, colors: settings.iconColors)
             Spacer(minLength: Tokens.Space.x3)
-            GlassButton(title: exportTitle, systemImage: "square.and.arrow.down", action: exportToCSV)
+            GlassButton(
+                title: Self.export.title,
+                systemImage: Self.export.systemImage,
+                sharesWidthWith: [Self.clear],
+                action: exportToCSV
+            )
                 .disabled(rows.isEmpty)
         }
     }
@@ -232,17 +242,28 @@ struct MonitorWindowView: View {
                 systemImage: "info.circle"
             )
             Spacer(minLength: Tokens.Space.x3)
-            Text(selection.isEmpty ? "⌘C copies selected rows" : "\(selection.count.formatted()) selected · ⌘C copies")
+            Text(rowSummary)
+                .monospacedDigit()
         }
         .lineLimit(1)
         .font(.system(size: Tokens.TextSize.caption))
         .foregroundStyle(.tertiary)
     }
 
-    private var exportTitle: String {
-        statusFilter == nil
-            ? "Export (\(rows.count.formatted()))"
-            : "Export \(rows.count.formatted()) shown"
+    /// Clear and Export stand one above the other at the right edge, so they share a width.
+    private static let clear = (title: "Clear history", systemImage: "trash")
+    private static let export = (title: "Export CSV", systemImage: "square.and.arrow.down")
+
+    /// How many rows the list shows — and Export writes. It used to sit in the Export title,
+    /// which then changed width on every ping and nudged the button along the toolbar.
+    private var rowSummary: String {
+        let total = pingService.history.count
+        var parts = [statusFilter == nil
+            ? "\(total.formatted()) rows"
+            : "\(rows.count.formatted()) of \(total.formatted()) shown"]
+        if !selection.isEmpty { parts.append("\(selection.count.formatted()) selected") }
+        parts.append("⌘C copies")
+        return parts.joined(separator: " · ")
     }
 
     private func toggleMonitoring() {

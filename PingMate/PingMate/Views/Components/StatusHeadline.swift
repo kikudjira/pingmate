@@ -125,7 +125,7 @@ struct MonitoringToggle: View {
                 .contentShape(.circle)
                 .glassCircle(diameter: diameter, tint: Color.primary.opacity(0.10))
                 .overlay {
-                    Circle().strokeBorder(Color.primary.opacity(0.22), lineWidth: 1)
+                    Circle().strokeBorder(Tokens.Fill.stroke, lineWidth: 1)
                 }
         }
         .buttonStyle(.plain)

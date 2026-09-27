@@ -6,6 +6,10 @@ struct GlassButton: View {
     let systemImage: String
     var muted: Bool = false
     var fills: Bool = false
+    /// Labels of the buttons this one sits in a column with. Each is laid out hidden behind
+    /// its own, so the whole column takes the width of the longest label rather than each
+    /// button hugging its own — without a width that breaks with another font or language.
+    var sharesWidthWith: [(title: String, systemImage: String)] = []
     let action: () -> Void
 
     @Environment(\.surfaceStyle) private var surfaceStyle
@@ -13,8 +17,14 @@ struct GlassButton: View {
     var body: some View {
         if surfaceStyle == .system {
             Button(action: action) {
-                Label(title, systemImage: systemImage)
-                    .frame(maxWidth: fills ? .infinity : nil)
+                ZStack {
+                    ForEach(sharesWidthWith.indices, id: \.self) { index in
+                        Label(sharesWidthWith[index].title, systemImage: sharesWidthWith[index].systemImage)
+                            .hidden()
+                    }
+                    Label(title, systemImage: systemImage)
+                }
+                .frame(maxWidth: fills ? .infinity : nil)
             }
             .buttonStyle(.bordered)
             .controlSize(.extraLarge)
