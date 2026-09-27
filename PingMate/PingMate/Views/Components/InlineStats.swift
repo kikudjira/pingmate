@@ -48,7 +48,7 @@ struct InlineStats: View {
         .padding(.horizontal, density == .filling ? Tokens.Space.x2 : Tokens.Space.x4)
         .frame(height: density == .filling ? nil : (surfaceStyle == .system ? Tokens.systemControlHeight : Tokens.controlHeight))
         .frame(maxWidth: density == .filling ? .infinity : nil)
-        .glassCard(cornerRadius: Tokens.Radius.small)
+        .glassCard(cornerRadius: Tokens.Radius.small, role: .control)
         .accessibilityElement(children: .combine)
     }
 }
